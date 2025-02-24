@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('eventos', EventoController::class);
+
