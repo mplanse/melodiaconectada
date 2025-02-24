@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Evento; // Importa el modelo
 
 class EventoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar una lista de eventos con paginación.
      */
     public function index()
     {
-        //
+        $eventos = Evento::paginate(10);
+
+        return view('eventos.index', compact('eventos'));
     }
 
     /**
