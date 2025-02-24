@@ -34,5 +34,3 @@ RUN composer dump-autoload --optimize
 # Give permissions to storage and bootstrap/cache
 RUN chmod -R 777 storage bootstrap/cache
 
-# Expose necessary ports (optional)
-EXPOSE 9000
