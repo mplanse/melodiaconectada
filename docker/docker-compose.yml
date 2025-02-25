@@ -3,22 +3,24 @@ services:
   app:
     build:
       context: ./melodia-emja  # Apunta a la raíz del proyecto (melodia-emja)
+      dockerfile: Dockerfile
     container_name: melodia-emja
     volumes:
       - ./melodia-emja:/var/www/html
     networks:
       - app-network
-    ports:
-      - "9000:80"
+    expose:
+      - "9000"
     environment:
       DB_CONNECTION: mysql
       DB_HOST: db
-      DB_PORT: 3307
+      DB_PORT: 3306
       DB_DATABASE: laravel
       DB_USERNAME: root
-      DB_PASSWORD: rootk
+      DB_PASSWORD: 
     depends_on:
       - db
+
   # Nginx como proxy inverso
   nginx:
     build:

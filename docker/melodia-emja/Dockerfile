@@ -8,10 +8,12 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -23,14 +25,17 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock /var/www/html/
 
 # Install Laravel dependencies
-RUN composer install --no-autoloader --no-scripts
+RUN composer install --no-interaction --no-scripts --optimize-autoloader
 
 # Copy the rest of the application files
 COPY . /var/www/html
 
-# Run the autoloader
-RUN composer dump-autoload --optimize
+# Generate the application key
+RUN php artisan key:generate --force
 
-# Give permissions to storage and bootstrap/cache
-RUN chmod -R 777 storage bootstrap/cache
+# Set permissions for Laravel storage and cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Expose port 9000 and start PHP-FPM server
+EXPOSE 9000
+CMD ["php-fpm"]
