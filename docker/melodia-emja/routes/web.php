@@ -17,5 +17,9 @@ Route::get('/', function () {
     return view('layouts.layout');
 });
 
+Route::get('/mapa', function () {
+    return view('mapa.mapa');
+});
+
 Route::resource('eventos', EventoController::class);
 
