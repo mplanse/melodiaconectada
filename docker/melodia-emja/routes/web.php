@@ -14,7 +14,7 @@ use App\Http\Controllers\EventoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.layout');
 });
 
 Route::resource('eventos', EventoController::class);

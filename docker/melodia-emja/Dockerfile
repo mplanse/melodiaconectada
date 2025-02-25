@@ -27,6 +27,12 @@ COPY composer.json composer.lock /var/www/html/
 # Install Laravel dependencies
 RUN composer install --no-interaction --no-scripts --optimize-autoloader
 
+# # Install Node.js dependencies
+# RUN npm install
+
+# # Compile assets with Vite (si planeas usar Vite en el futuro)
+# RUN npm run build
+
 # Copy the rest of the application files
 COPY . /var/www/html
 
