@@ -11,7 +11,6 @@ class Mensaje extends Model
     protected $table = 'mensajes';
     protected $primaryKey = 'idMensaje';
     public $timestamps = false;
-    protected $fillable = ['timestamp', 'origen_usuarios_idUsuario', 'destino_usuarios_idUsuario'];
     
     public function origen()
     {

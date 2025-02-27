@@ -13,11 +13,11 @@ services:
       - "9000"
     environment:
       DB_CONNECTION: mysql
-      DB_HOST: db
+      DB_HOST: 127.0.0.1
       DB_PORT: 3306
-      DB_DATABASE: laravel
+      DB_DATABASE: mydb
       DB_USERNAME: root
-      DB_PASSWORD: 
+      DB_PASSWORD: 2308
     depends_on:
       - db
 
