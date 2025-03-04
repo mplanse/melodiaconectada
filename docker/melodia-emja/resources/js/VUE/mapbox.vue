@@ -18,7 +18,7 @@
     mounted() {
       // Configura el token de acceso de Mapbox
       mapboxgl.accessToken =
-        "pk.eyJ1IjoiYXJuYXV2ZW50dXJhIiwiYSI6ImNsY3ltcGpoOTB1NzgzcHA3eTJndWgxOHoifQ.H3tOjoRnBA_csnH1Qk5UQw";
+        "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203amQzaXQ4MDU0eTJqcXg3ZGtid3RhcCJ9.sxRqk8OklApETbJ_-SnMdQ";
 
       // Inicializa el mapa
       this.map = new mapboxgl.Map({
