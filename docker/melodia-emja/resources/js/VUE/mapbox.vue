@@ -17,15 +17,14 @@
     },
     mounted() {
       // Configura el token de acceso de Mapbox
-      mapboxgl.accessToken =
-        "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203amQzaXQ4MDU0eTJqcXg3ZGtid3RhcCJ9.sxRqk8OklApETbJ_-SnMdQ";
+      mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203amQzaXQ4MDU0eTJqcXg3ZGtid3RhcCJ9.sxRqk8OklApETbJ_-SnMdQ';
 
       // Inicializa el mapa
       this.map = new mapboxgl.Map({
-        container: "map", // ID del contenedor
-        style: "mapbox://styles/mapbox/streets-v12", // Estilo del mapa
-        center: [-74.5, 40], // Coordenadas iniciales [lng, lat]
-        zoom: 9, // Nivel de zoom inicial
+        container: 'map',  // ID del contenedor
+        style: 'mapbox://styles/mapbox/streets-v12',  // Estilo del mapa
+        center: [-74.5, 40],  // Coordenadas iniciales [lng, lat]
+        zoom: 9,  // Nivel de zoom inicial
       });
 
       // Opcional: Agregar control de navegación (zoom in/out)
@@ -44,6 +43,6 @@
   /* Estilos opcionales para el mapa */
   #map {
     width: 100%;
-    height: 500px;
+    height: 500px; /* Asegúrate de que el contenedor tenga una altura definida */
   }
   </style>

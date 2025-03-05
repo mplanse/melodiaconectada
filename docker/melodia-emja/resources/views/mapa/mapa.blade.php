@@ -3,7 +3,7 @@
 @section('content') <!-- Abrimos la sección correctamente -->
 
 <div id="app">
-    <mapa-component></mapa-component>
+    <mapbox-component></mapbox-component>
 </div>
 
 @endsection

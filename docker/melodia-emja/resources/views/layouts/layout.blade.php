@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Mi Aplicación')</title>
+
+    <!-- Incluye los archivos de Vue.js y Mapbox generados por Vite -->
+    @vite(['resources/js/app.js', 'resources/css/app.css']) <!-- Vite: tu app.js y app.css -->
+
+    <!-- Aquí se incluirían otras bibliotecas si las necesitas, como Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    {{-- <script src='https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css' rel='stylesheet' /> --}}
 </head>
 <body>
 
@@ -34,6 +37,7 @@
         <p>&copy; {{ date('Y') }} Mi Aplicación. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
