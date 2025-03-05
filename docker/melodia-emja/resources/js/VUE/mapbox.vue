@@ -22,11 +22,12 @@
 
       // Inicializa el mapa
       this.map = new mapboxgl.Map({
-        container: 'map',  // ID del contenedor
-        style: 'mapbox://styles/mapbox/streets-v12',  // Estilo del mapa
-        center: [-74.5, 40],  // Coordenadas iniciales [lng, lat]
-        zoom: 9,  // Nivel de zoom inicial
-      });
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v12',
+  center: [2.154007, 41.390205],  // Barcelona [lng, lat]
+  zoom: 12,  // Nivel de zoom adecuado
+});
+
 
       // Opcional: Agregar control de navegación (zoom in/out)
       this.map.addControl(new mapboxgl.NavigationControl());
