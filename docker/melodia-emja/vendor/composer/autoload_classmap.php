@@ -9,6 +9,18 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
+=======
+    'App\\Http\\Controllers\\DestinoController' => $baseDir . '/app/Http/Controllers/DestinoController.php',
+    'App\\Http\\Controllers\\EventoController' => $baseDir . '/app/Http/Controllers/EventoController.php',
+    'App\\Http\\Controllers\\GeneroMusicalController' => $baseDir . '/app/Http/Controllers/GeneroMusicalController.php',
+    'App\\Http\\Controllers\\MultimediaController' => $baseDir . '/app/Http/Controllers/MultimediaController.php',
+    'App\\Http\\Controllers\\MusicoController' => $baseDir . '/app/Http/Controllers/MusicoController.php',
+    'App\\Http\\Controllers\\OrigenController' => $baseDir . '/app/Http/Controllers/OrigenController.php',
+    'App\\Http\\Controllers\\RestauranteController' => $baseDir . '/app/Http/Controllers/RestauranteController.php',
+    'App\\Http\\Controllers\\RolController' => $baseDir . '/app/Http/Controllers/RolController.php',
+    'App\\Http\\Controllers\\UsuarioController' => $baseDir . '/app/Http/Controllers/UsuarioController.php',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -19,7 +31,21 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+<<<<<<< HEAD
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+=======
+    'App\\Models\\Destino' => $baseDir . '/app/Models/Destino.php',
+    'App\\Models\\Evento' => $baseDir . '/app/Models/Evento.php',
+    'App\\Models\\GeneroMusical' => $baseDir . '/app/Models/GeneroMusical.php',
+    'App\\Models\\Mensaje' => $baseDir . '/app/Models/Mensaje.php',
+    'App\\Models\\Multimedia' => $baseDir . '/app/Models/Multimedia.php',
+    'App\\Models\\Musico' => $baseDir . '/app/Models/Musico.php',
+    'App\\Models\\Origen' => $baseDir . '/app/Models/Origen.php',
+    'App\\Models\\Restaurante' => $baseDir . '/app/Models/Restaurante.php',
+    'App\\Models\\Rol' => $baseDir . '/app/Models/Rol.php',
+    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Usuario' => $baseDir . '/app/Models/Usuario.php',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

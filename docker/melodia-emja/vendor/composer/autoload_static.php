@@ -313,6 +313,7 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
+<<<<<<< HEAD
             0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
             1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
@@ -320,6 +321,15 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         array (
             0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
             1 => __DIR__ . '/..' . '/spatie/ignition/src',
+=======
+            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+        ),
+        'Spatie\\Ignition\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -355,8 +365,13 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         ),
         'Psr\\Http\\Message\\' => 
         array (
+<<<<<<< HEAD
             0 => __DIR__ . '/..' . '/psr/http-message/src',
             1 => __DIR__ . '/..' . '/psr/http-factory/src',
+=======
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -533,6 +548,18 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
+=======
+        'App\\Http\\Controllers\\DestinoController' => __DIR__ . '/../..' . '/app/Http/Controllers/DestinoController.php',
+        'App\\Http\\Controllers\\EventoController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventoController.php',
+        'App\\Http\\Controllers\\GeneroMusicalController' => __DIR__ . '/../..' . '/app/Http/Controllers/GeneroMusicalController.php',
+        'App\\Http\\Controllers\\MultimediaController' => __DIR__ . '/../..' . '/app/Http/Controllers/MultimediaController.php',
+        'App\\Http\\Controllers\\MusicoController' => __DIR__ . '/../..' . '/app/Http/Controllers/MusicoController.php',
+        'App\\Http\\Controllers\\OrigenController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrigenController.php',
+        'App\\Http\\Controllers\\RestauranteController' => __DIR__ . '/../..' . '/app/Http/Controllers/RestauranteController.php',
+        'App\\Http\\Controllers\\RolController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolController.php',
+        'App\\Http\\Controllers\\UsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuarioController.php',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -543,7 +570,21 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+<<<<<<< HEAD
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+=======
+        'App\\Models\\Destino' => __DIR__ . '/../..' . '/app/Models/Destino.php',
+        'App\\Models\\Evento' => __DIR__ . '/../..' . '/app/Models/Evento.php',
+        'App\\Models\\GeneroMusical' => __DIR__ . '/../..' . '/app/Models/GeneroMusical.php',
+        'App\\Models\\Mensaje' => __DIR__ . '/../..' . '/app/Models/Mensaje.php',
+        'App\\Models\\Multimedia' => __DIR__ . '/../..' . '/app/Models/Multimedia.php',
+        'App\\Models\\Musico' => __DIR__ . '/../..' . '/app/Models/Musico.php',
+        'App\\Models\\Origen' => __DIR__ . '/../..' . '/app/Models/Origen.php',
+        'App\\Models\\Restaurante' => __DIR__ . '/../..' . '/app/Models/Restaurante.php',
+        'App\\Models\\Rol' => __DIR__ . '/../..' . '/app/Models/Rol.php',
+        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/Models/Usuario.php',
+>>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
