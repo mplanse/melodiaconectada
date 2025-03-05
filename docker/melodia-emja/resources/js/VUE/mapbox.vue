@@ -7,6 +7,7 @@
 
   <script>
   import mapboxgl from 'mapbox-gl'; // Importar Mapbox GL JS
+  import 'mapbox-gl/dist/mapbox-gl.css'; // Asegurar que el estilo se carga
 
   export default {
     name: "MapComponent",
@@ -17,7 +18,7 @@
     },
     mounted() {
       // Configura el token de acceso de Mapbox
-      mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203amQzaXQ4MDU0eTJqcXg3ZGtid3RhcCJ9.sxRqk8OklApETbJ_-SnMdQ';
+      mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
 
       // Inicializa el mapa
       this.map = new mapboxgl.Map({
