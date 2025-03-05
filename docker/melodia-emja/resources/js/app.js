@@ -1,15 +1,14 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
+
+// Configura el token de acceso de Mapbox
+mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
 
 // Define el componente de Vue para Mapbox
 const MapboxComponent = {
     template: '<div id="map" style="width: 100%; height: 400px;"></div>',
     mounted() {
-        // Configura el token de acceso de Mapbox
-        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-
         // Inicializa el mapa cuando el componente se monta
         new mapboxgl.Map({
             container: 'map',
