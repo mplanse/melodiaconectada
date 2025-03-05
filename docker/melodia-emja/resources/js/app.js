@@ -13,9 +13,10 @@ const MapboxComponent = {
         new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-74.5, 40], // Coordenadas iniciales [longitud, latitud]
-            zoom: 9 // Nivel de zoom inicial
+            center: [2.154007, 41.390205], // Barcelona [lng, lat]
+            zoom: 12 // Nivel de zoom adecuado
         });
+
     }
 };
 
