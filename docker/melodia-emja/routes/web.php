@@ -23,3 +23,15 @@ Route::get('/mapa', function () {
 
 Route::resource('eventos', EventoController::class);
 
+Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
+Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+});
