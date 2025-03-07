@@ -347,7 +347,6 @@ class InstalledVersions
         $copiedLocalDir = false;
 
         if (self::$canGetVendors) {
-            $selfDir = strtr(__DIR__, '\\', '/');
             foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
                 $vendorDir = strtr($vendorDir, '\\', '/');
 >>>>>>> dec67432907daafa793a0acdf82f5f276b2eb8d0
