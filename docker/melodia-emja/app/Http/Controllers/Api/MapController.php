@@ -13,7 +13,7 @@ class MapController extends Controller
     public function obtenerCoordenadas()
     {
         $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
-        $restaurantes = Restaurante::select('idRestaurante', 'direccion', 'lat', 'long')->get();
+        $restaurantes = Restaurante::select('idRestaurante', 'direccion')->get();
 
         return response()->json([
             'musicos' => $musicos,
