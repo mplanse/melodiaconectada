@@ -1,6 +1,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import mapboxgl from 'mapbox-gl';
+import MapComponent from './VUE/mapbox.vue';
 
 // Configura el token de acceso de Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
@@ -28,3 +29,4 @@ app.component('mapbox-component', MapboxComponent);
 
 // Monta la aplicación en el contenedor con id="app"
 app.mount('#app');
+
