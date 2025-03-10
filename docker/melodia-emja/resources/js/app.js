@@ -1,6 +1,10 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import MapComponent from './VUE/mapbox.vue';  // Ajusta la ruta según corresponda
+import MapComponent from './VUE/mapbox.vue';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8080/api';
+
 
 const app = createApp({});
 

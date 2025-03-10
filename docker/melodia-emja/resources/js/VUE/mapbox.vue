@@ -7,12 +7,14 @@
   <script>
   import mapboxgl from 'mapbox-gl';
   import 'mapbox-gl/dist/mapbox-gl.css';
+  import axios from 'axios'; // Usaremos Axios para hacer la solicitud HTTP
 
   export default {
     name: "MapComponent",
     data() {
       return {
         map: null,
+        musicos: [], // Aquí almacenaremos las coordenadas de los músicos
       };
     },
     mounted() {
@@ -29,6 +31,27 @@
 
       // Agregar control de navegación (zoom in/out)
       this.map.addControl(new mapboxgl.NavigationControl());
+
+      // Llamada a la API para obtener los músicos
+      axios.get('/api/musicos-coordenadas')
+        .then(response => {
+          this.musicos = response.data.musicos;
+          this.addMarkers(); // Agregar los marcadores en el mapa
+        })
+        .catch(error => {
+          console.error("Hubo un error al obtener las coordenadas de los músicos:", error);
+        });
+    },
+    methods: {
+      addMarkers() {
+        this.musicos.forEach(musico => {
+          // Crear un marcador para cada músico
+          new mapboxgl.Marker()
+            .setLngLat([musico.long, musico.lat]) // Longitud, latitud
+            .setPopup(new mapboxgl.Popup().setHTML(`<h3>${musico.descripcion}</h3>`)) // Mostrar descripción al hacer clic
+            .addTo(this.map);
+        });
+      },
     },
     beforeUnmount() {
       // Limpiar el mapa antes de destruir el componente
