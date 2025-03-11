@@ -53,25 +53,25 @@
       },
 
       // 🔹 2. Convertir direcciones de restaurantes en coordenadas
-      async geocodificarRestaurantes() {
-        for (let restaurante of this.restaurantes) {
-          let direccion = restaurante.direccion;
-          let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(direccion)}.json?access_token=${mapboxgl.accessToken}`;
+    //   async geocodificarRestaurantes() {
+    //     for (let restaurante of this.restaurantes) {
+    //       let direccion = restaurante.direccion;
+    //       let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(direccion)}.json?access_token=${mapboxgl.accessToken}`;
 
-          try {
-            let response = await axios.get(url);
-            let coordenadas = response.data.features[0]?.geometry?.coordinates;
+    //       try {
+    //         let response = await axios.get(url);
+    //         let coordenadas = response.data.features[0]?.geometry?.coordinates;
 
-            if (coordenadas) {
-              this.agregarMarcador(coordenadas, direccion, "red"); // Color rojo para restaurantes
-            } else {
-              console.warn(`No se encontraron coordenadas para: ${direccion}`);
-            }
-          } catch (error) {
-            console.error(`Error geocodificando ${direccion}:`, error);
-          }
-        }
-      },
+    //         if (coordenadas) {
+    //           this.agregarMarcador(coordenadas, direccion, "red"); // Color rojo para restaurantes
+    //         } else {
+    //           console.warn(`No se encontraron coordenadas para: ${direccion}`);
+    //         }
+    //       } catch (error) {
+    //         console.error(`Error geocodificando ${direccion}:`, error);
+    //       }
+    //     }
+    //   },
 
       // 🔹 3. Agregar un marcador en el mapa con color y popup
       agregarMarcador(coordenadas, texto, color) {
