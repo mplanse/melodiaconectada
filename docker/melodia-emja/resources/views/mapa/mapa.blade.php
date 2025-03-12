@@ -2,7 +2,7 @@
 
 @section('content') <!-- Abrimos la sección correctamente -->
 
-<div id="app">
+<div id="mapbox">
     <mapbox-component></mapbox-component>
 </div>
 
