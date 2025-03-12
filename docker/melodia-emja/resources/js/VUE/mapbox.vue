@@ -7,20 +7,20 @@
   <script>
   import mapboxgl from 'mapbox-gl';
   import 'mapbox-gl/dist/mapbox-gl.css';
-  import axios from 'axios';
+
 
   export default {
-    name: "MapComponent",
-    data() {
-      return {
-        map: null,
-        musicos: [],
-        restaurantes: []
-      };
-    },
+    // name: "MapComponent",
+    // data() {
+    //   return {
+    //     map: null,
+    //     musicos: [],
+    //     restaurantes: []
+    //   };
+
     mounted() {
       // Configura el token de acceso de Mapbox
-      mapboxgl.accessToken = 'TU_ACCESS_TOKEN_DE_MAPBOX';
+      mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
 
       // Inicializa el mapa
       this.map = new mapboxgl.Map({
@@ -29,28 +29,29 @@
         center: [2.154007, 41.390205], // Barcelona
         zoom: 12
       });
+    }
+}
+    //   this.map.addControl(new mapboxgl.NavigationControl());
 
-      this.map.addControl(new mapboxgl.NavigationControl());
+    //   // Obtener datos desde Laravel
+    //   axios.get('/api/obtener-coordenadas')
+    //     .then(response => {
+    //       this.musicos = response.data.musicos;
+    //       this.restaurantes = response.data.restaurantes;
 
-      // Obtener datos desde Laravel
-      axios.get('/api/obtener-coordenadas')
-        .then(response => {
-          this.musicos = response.data.musicos;
-          this.restaurantes = response.data.restaurantes;
+    //       this.agregarMusicos();
+    //       this.geocodificarRestaurantes();
+    //     })
+    //     .catch(error => console.error("Error al obtener datos:", error));
 
-          this.agregarMusicos();
-          this.geocodificarRestaurantes();
-        })
-        .catch(error => console.error("Error al obtener datos:", error));
-    },
-    methods: {
-      // 🔹 1. Agregar marcadores para músicos (usan lat, long directamente)
-      agregarMusicos() {
-        this.musicos.forEach(musico => {
-          let coordenadas = [musico.long, musico.lat];
-          this.agregarMarcador(coordenadas, musico.descripcion, "blue"); // Color azul para músicos
-        });
-      },
+    // methods: {
+    //   🔹 1. Agregar marcadores para músicos (usan lat, long directamente)
+    //   agregarMusicos() {
+    //     this.musicos.forEach(musico => {
+    //       let coordenadas = [musico.long, musico.lat];
+    //       this.agregarMarcador(coordenadas, musico.descripcion, "blue"); // Color azul para músicos
+    //     });
+    //   },
 
       // 🔹 2. Convertir direcciones de restaurantes en coordenadas
     //   async geocodificarRestaurantes() {
@@ -74,19 +75,19 @@
     //   },
 
       // 🔹 3. Agregar un marcador en el mapa con color y popup
-      agregarMarcador(coordenadas, texto, color) {
-        let marker = new mapboxgl.Marker({ color })
-          .setLngLat(coordenadas)
-          .setPopup(new mapboxgl.Popup().setText(texto))
-          .addTo(this.map);
-      }
-    },
-    beforeDestroy() {
-      if (this.map) {
-        this.map.remove();
-      }
-    },
-  };
+//       agregarMarcador(coordenadas, texto, color) {
+//         let marker = new mapboxgl.Marker({ color })
+//           .setLngLat(coordenadas)
+//           .setPopup(new mapboxgl.Popup().setText(texto))
+//           .addTo(this.map);
+//       }
+//     },
+//     beforeDestroy() {
+//       if (this.map) {
+//         this.map.remove();
+//       }
+//     },
+//   };
   </script>
 
   <style scoped>
@@ -94,4 +95,4 @@
     width: 100%;
     height: 500px;
   }
-  </style>
+   </style>
