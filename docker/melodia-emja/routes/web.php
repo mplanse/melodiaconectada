@@ -34,6 +34,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
-        return view('home');
+        return view('eventos.index');
     })->name('home');
 });
