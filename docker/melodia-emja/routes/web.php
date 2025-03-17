@@ -32,8 +32,10 @@ Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.index');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
-        return view('eventos.index');
+        return view('layouts.layout');
     })->name('home');
 });
