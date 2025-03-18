@@ -32,7 +32,17 @@ class MapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+        ]);
+
+        $musico = Musico::create($validatedData);
+
+        return response()->json([
+            'message' => 'Marcador guardado correctamente',
+            'musico' => $musico,
+        ]);
     }
 
     /**
