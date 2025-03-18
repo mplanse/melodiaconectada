@@ -12,14 +12,17 @@ class MensajeController extends Controller
      */
     public function index(Request $request)
     {
-        $userId = $request->input('user_id', 1); // Default to user 1
+        // Obtener el ID del usuario autenticado
+        $userId = auth()->id();
 
+        // Obtener los usuarios (si es necesario para la vista)
         $usuarios = Usuario::all();
 
-        $mensajes = Mensaje::where(function ($query) use ($userId) {
-            $query->where('origen_usuarios_idUsuario', $userId)
-                ->orWhere('destino_usuarios_idUsuario', $userId);
-        })->orderBy('timestamp', 'desc')->get();
+        // Obtener los mensajes del usuario autenticado (como origen o destino)
+        $mensajes = Mensaje::where('origen_usuarios_idUsuario', $userId)
+            ->orWhere('destino_usuarios_idUsuario', $userId)
+            ->orderBy('timestamp', 'desc')
+            ->get();
 
         return view('mensajes.index', compact('mensajes', 'usuarios', 'userId'));
     }

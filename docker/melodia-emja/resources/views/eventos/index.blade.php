@@ -1,6 +1,6 @@
 @extends('layouts.layout') <!-- Asegúrate de extender una plantilla base -->
 
-@section('content') <!-- Abrimos la sección correctamente -->
+@section('content')
 
 <div class="container">
     <h1 class="mb-4">Lista de Eventos</h1>
@@ -14,7 +14,7 @@
                     <th>Descripción</th>
                     <th>Fecha</th>
                     <th>Precio</th>
-                    <th>Imagen</th> <!-- Nueva columna para la imagen -->
+                    <th>Imagen</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

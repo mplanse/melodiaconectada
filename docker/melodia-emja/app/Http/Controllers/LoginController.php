@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         Auth::login($usuario);
 
-        return redirect('/eventos/index');
+        return redirect('eventos');
     }
 
     public function logout()
