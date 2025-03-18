@@ -17,7 +17,7 @@ use App\Http\Controllers\MensajeController;
 */
 
 Route::get('/', function () {
-    return view('layouts.layout');
+    return view('landing');
 });
 
 Route::get('/mapa', function () {
