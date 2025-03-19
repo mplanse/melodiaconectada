@@ -9,6 +9,16 @@
     <title>Document</title>
 </head>
 <body>
-aaaaaaaaa
+    <div class="contenedor">
+        <img src="{{ asset('images/logo.png') }}" alt="BeatBite Logo" class="logo">
+        <h1>"BeatBite: Donde la música en vivo encuentra su escenario perfecto."</h1>
+        <div class="botones">
+            <a href="#" class="btn btn-iniciar">Iniciar sesión</a>
+            <a href="#" class="btn btn-registrar">Registrarse</a>
+        </div>
+        <div class="flecha">
+            &#9660;
+        </div>
+    </div>
 </body>
 </html>
