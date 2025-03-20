@@ -147,3 +147,64 @@ h1 {
 .carousel-button:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
+.container-faqs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.beatbite-container {
+
+    background-color: #222;
+    border-radius: 10px;
+    border: 2px solid #007BFF;
+    padding: 20px;
+    max-width: 500px;
+    text-align: left;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    margin: 80px;
+}
+
+.beatbite-title {
+    text-align: center;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.beatbite-list {
+    list-style: none;
+    padding: 0;
+}
+
+.beatbite-item {
+    margin: 10px 0;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #fff;
+}
+
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.contact-card {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+}
+.contact-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.btn-submit {
+    background-color: #28a745;
+    border: none;
+    width: 100%;
+}
