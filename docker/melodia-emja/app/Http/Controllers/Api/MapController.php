@@ -24,7 +24,11 @@ class MapController extends Controller
      */
     public function index()
     {
-        //
+        // Obtener los músicos con sus coordenadas y datos relacionados
+        $musicos = Musico::with('usuario')->get();
+
+        // Pasar los datos a la vista Blade
+        return view('index', compact('musicos'));
     }
 
     /**
