@@ -1,5 +1,11 @@
 body {
-    background-color: #2D2C2C; /* Jet */
+
+    background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('../img/fondolanding.png');
+
+
+    background-color: #2D2C2C;/* Jet */
     background-size: cover;
     font-family: 'Arial', sans-serif;
     color: white;
@@ -93,60 +99,127 @@ h1 {
     margin-bottom: 100px;
 }
 
-/* Contenedor del carrusel */
-.carousel {
-    display: flex;
-    overflow: hidden; /* Oculta las imágenes que no están visibles */
-    gap: 10px;
+
+/* Colors */
+/* Estilos para el contenedor del slider */
+.slider-images-container {
+    max-width: 80%;
+    margin: 0 auto;
     padding: 20px;
-    position: relative; /* Para posicionar los botones laterales */
-    justify-content: flex-start; /* Alinea las imágenes al inicio */
+    background: transparent;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
 }
 
-/* Imágenes del carrusel */
-.carousel img {
-    flex: 0 0 calc(33.33% - 10px); /* Cada imagen ocupa un tercio del ancho del carrusel */
-    height: auto;
+/* Estilos para las imágenes del slider */
+.slider-images-container img {
+    width: 100%;
     border-radius: 10px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0.7; /* Reduce la opacidad de las imágenes no activas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Imagen activa (central) más grande */
-.carousel img.active {
-    transform: scale(1.2); /* Agranda la imagen seleccionada */
-    z-index: 1; /* Asegura que esté por encima de las demás */
-    transition: transform 0.3s ease, z-index 0.3s ease;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.5); /* Añade un efecto de sombra */
-    opacity: 1; /* Imagen activa con opacidad completa */
-}
-
-/* Botones laterales */
-.carousel-button {
+/* Flechas de navegación */
+.slick-prev, .slick-next {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
     z-index: 10;
-    font-size: 18px;
-    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.carousel-button.left {
+/* Flecha izquierda */
+.slick-prev {
     left: 10px;
 }
 
-.carousel-button.right {
+/* Flecha derecha */
+.slick-next {
     right: 10px;
 }
 
-.carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+/* Elimina el texto predeterminado de las flechas */
+.slick-prev:before,
+.slick-next:before {
+    content: ''; /* Elimina el texto "Previous" y "Next" */
+    display: none; /* Asegura que no se muestre nada */
+    font-size: 0; /* Asegura que no ocupe espacio */
+    line-height: 0;
 }
+
+/* Opcional: Agregar íconos personalizados para las flechas */
+.slick-prev:after,
+.slick-next:after {
+    font-family: 'FontAwesome'; /* Usa FontAwesome o cualquier otra fuente de íconos */
+    font-size: 20px;
+    color: #6a11cb;
+}
+
+.slick-prev:after {
+    content: '\f104'; /* Ícono de flecha izquierda (FontAwesome) */
+}
+
+.slick-next:after {
+    content: '\f105'; /* Ícono de flecha derecha (FontAwesome) */
+}
+
+/* Estilos para los dots */
+.slick-dots {
+    bottom: 10px; /* Ajusta la posición de los dots */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaciado entre los puntos */
+    list-style: none; /* Elimina los estilos de lista */
+    padding: 0;
+    margin: 0;
+}
+
+.slick-dots li {
+    margin: 0;
+}
+
+.slick-dots li button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; /* Hace que los dots sean redondos */
+    background-color: #ccc; /* Color de los dots inactivos */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0; /* Oculta cualquier contenido numérico */
+    line-height: 0; /* Asegura que no haya espacio para el texto */
+    padding: 0; /* Elimina cualquier padding adicional */
+}
+
+.slick-dots li button:before {
+    content: ''; /* Elimina el contenido numérico */
+}
+
+.slick-dots li.slick-active button {
+    background-color: #ffde59; /* Color del dot activo */
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .container-faqs {
     display: flex;
@@ -197,7 +270,7 @@ h1 {
     padding: 20px;
     max-width: 500px;
     width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    box-shadow: 0px 0px 10px rgba(60, 60, 60, 0.5);
 }
 .contact-title {
     font-size: 1.5em;

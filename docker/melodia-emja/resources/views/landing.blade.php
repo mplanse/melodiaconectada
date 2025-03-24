@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -28,13 +28,18 @@
         <h4>Músicos y restaurantes conectados en una sola plataforma.</h4>
 
         <div class="carousel">
-            <button class="carousel-button left">&#9664;</button>
-            <img src="{{ asset('img/imagen1.jpg') }}">
-            <img src="{{ asset('img/imagen2.jpg') }}">
-            <img src="{{ asset('img/imagen3.jpg') }}">
-            <img src="{{ asset('img/imagen4.jpg') }}">
-            <img src="{{ asset('img/imagen5.jpg') }}">
-            <button class="carousel-button right">&#9654;</button>
+            <div class="wrapper">
+                <div class="slider-container">
+                    <div class="slider-images-container">
+                        <img class="slide-image" src="{{ asset('img/imagen1.jpg') }}" alt="Imagen 1">
+                        <img class="slide-image" src="{{ asset('img/imagen2.jpg') }}" alt="Imagen 2">
+                        <img class="slide-image" src="{{ asset('img/imagen3.jpg') }}" alt="Imagen 3">
+                        <img class="slide-image" src="{{ asset('img/imagen4.jpg') }}" alt="Imagen 4">
+                        <img class="slide-image" src="{{ asset('img/imagen5.jpg') }}" alt="Imagen 5">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="container-faqs">
@@ -78,11 +83,15 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{{ asset('js/carrusel.js') }}"></script>
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/carousel.js') }}"></script>
 
 </body>
 
