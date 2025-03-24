@@ -38,8 +38,14 @@ class EventoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $event = Evento::findOrFail($id);
+        return response()->json($event);
     }
+    public function evento_individual($id)
+    {
+        return view('eventos.evento_individual', compact('id'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.
