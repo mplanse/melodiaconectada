@@ -1,0 +1,210 @@
+body {
+    background-color: #2D2C2C; /* Jet */
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: block; /* Cambiado de flex a block */
+}
+
+/* Ajuste para que el contenedor ocupe toda la vista */
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    text-align: center;
+}
+
+.logo {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 100%;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.botones {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-iniciar {
+    background-color: #E09D89; /* Melon */
+    color: #2D2C2C; /* Jet */
+    border: 2px solid #CF977F; /* Buff */
+}
+
+.btn-registrar {
+    background-color: #65AB7C; /* Mint */
+    color: #2D2C2C; /* JET */
+    border: 2px solid #48BF84; /* Emerald */
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn-iniciar:hover {
+    background-color: #CF977F; /* Buff */
+    color: #FFFFFF;
+}
+
+.btn-registrar:hover {
+    background-color: #48BF84; /* Emerald */
+    color: #FFFFFF;
+}
+
+.flecha {
+    font-size: 24px;
+    margin-top: 20px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.flecha:hover {
+    transform: translateY(5px);
+}
+
+.h1_melodia{
+    font-size: 50px;
+    margin-bottom: 100px;
+}
+
+/* Contenedor del carrusel */
+.carousel {
+    display: flex;
+    overflow: hidden; /* Oculta las imágenes que no están visibles */
+    gap: 10px;
+    padding: 20px;
+    position: relative; /* Para posicionar los botones laterales */
+    justify-content: flex-start; /* Alinea las imágenes al inicio */
+}
+
+/* Imágenes del carrusel */
+.carousel img {
+    flex: 0 0 calc(33.33% - 10px); /* Cada imagen ocupa un tercio del ancho del carrusel */
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7; /* Reduce la opacidad de las imágenes no activas */
+}
+
+/* Imagen activa (central) más grande */
+.carousel img.active {
+    transform: scale(1.2); /* Agranda la imagen seleccionada */
+    z-index: 1; /* Asegura que esté por encima de las demás */
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.5); /* Añade un efecto de sombra */
+    opacity: 1; /* Imagen activa con opacidad completa */
+}
+
+/* Botones laterales */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+.carousel-button.left {
+    left: 10px;
+}
+
+.carousel-button.right {
+    right: 10px;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.container-faqs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.beatbite-container {
+
+    background-color: #222;
+    border-radius: 10px;
+    border: 2px solid #007BFF;
+    padding: 20px;
+    max-width: 500px;
+    text-align: left;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    margin: 80px;
+}
+
+.beatbite-title {
+    text-align: center;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.beatbite-list {
+    list-style: none;
+    padding: 0;
+}
+
+.beatbite-item {
+    margin: 10px 0;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #fff;
+}
+
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.contact-card {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+}
+.contact-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.btn-submit {
+    background-color: #28a745;
+    border: none;
+    width: 100%;
+}
