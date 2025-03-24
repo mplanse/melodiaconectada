@@ -83,9 +83,14 @@ h1 {
     color: #FFFFFF;
 }
 
+.flecha a {
+    text-decoration: none;
+    color: white;
+}
+
 .flecha {
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 80px;
     color: white;
     transition: transform 0.3s ease;
 }
@@ -206,20 +211,8 @@ h1 {
 }
 
 .slick-dots li.slick-active button {
-    background-color: #ffde59; /* Color del dot activo */
+    background-color: #CF977F; /* Color del dot activo */
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .container-faqs {
     display: flex;

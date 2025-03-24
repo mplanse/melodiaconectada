@@ -14,16 +14,16 @@
         <img src="{{ asset('img/logo.png') }}" alt="BeatBite Logo" class="logo">
         <h1>"BeatBite: Donde la música en vivo encuentra su escenario perfecto."</h1>
         <div class="botones">
-            <a href="#" class="btn btn-iniciar">Iniciar sesión</a>
-            <a href="#" class="btn btn-registrar">Registrarse</a>
+            <a href="{{ route('login') }}" class="btn btn-iniciar">Iniciar sesión</a>
+            <a href="{{ route('register') }}" class="btn btn-registrar">Registrarse</a>
         </div>
         <div class="flecha">
-            &#9660;
+            <a href="#flecha_direccion">&#9660;</a>
         </div>
     </div>
 
     <div class='carrusel'>
-        <h1 class='h1_melodia'>🎶 MELODÍA CONECTADA: DA VIDA A TU <br> NEGOCIO CON MÚSICA EN DIRECTO 🎶</h1>
+        <h1 class='h1_melodia' id="flecha_direccion">🎶 MELODÍA CONECTADA: DA VIDA A TU <br> NEGOCIO CON MÚSICA EN DIRECTO 🎶</h1>
 
         <h4>Músicos y restaurantes conectados en una sola plataforma.</h4>
 
@@ -92,6 +92,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+        document.querySelector('.flecha a').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
 
 </body>
 
