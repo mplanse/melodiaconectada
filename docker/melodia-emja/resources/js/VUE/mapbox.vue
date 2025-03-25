@@ -1,73 +1,95 @@
 <template>
     <div>
-      <div id="map" style="width: 100%; height: 500px;"></div>
+        <div id="map" style="width: 100%; height: 500px"></div>
     </div>
-  </template>
+</template>
 
-  <script>
-  import mapboxgl from 'mapbox-gl';
-  import axios from 'axios';
-  import 'mapbox-gl/dist/mapbox-gl.css';
+<script>
+import mapboxgl from "mapbox-gl";
+import axios from "axios";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-  export default {
+export default {
+    props: {
+        musicos: {
+            type: Array,
+            required: true,
+        },
+    },
     data() {
-      return {
-        map: null,
-        musicos: []
-      };
+        return {
+            map: null,
+            localMusicos: [], // Variable local para almacenar los datos de la API
+        };
     },
 
     mounted() {
-      // Configura el token de acceso de Mapbox
-      mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
-
-      // Inicializa el mapa
-      this.map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [2.154007, 41.390205], // Barcelona
-        zoom: 12
-      });
-
-      // Agregar controles de navegación
-      this.map.addControl(new mapboxgl.NavigationControl());
-
-      // Obtener datos de músicos desde Laravel
-      this.obtenerMusicos();
+        this.initializeMap();
     },
 
     methods: {
-      async obtenerMusicos() {
-        try {
-          const response = await axios.get('http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas'); // Ajusta la URL según tu API
-          this.musicos = response.data.musicos;
-          this.agregarMarcadores();
-        } catch (error) {
-          console.error('Error al obtener datos de músicos:', error);
-        }
-      },
+        initializeMap() {
+            mapboxgl.accessToken =
+                "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
 
-      agregarMarcadores() {
-        this.musicos.forEach(musico => {
-          new mapboxgl.Marker({ color: "blue" }) // Marcador azul
-            .setLngLat([musico.long, musico.lat]) // Mapbox usa [longitud, latitud]
-            .setPopup(new mapboxgl.Popup().setHTML(`<h3>${musico.descripcion}</h3>`)) // Popup con info
-            .addTo(this.map);
-        });
-      }
+            // Inicializa el mapa
+            this.map = new mapboxgl.Map({
+                container: "map",
+                style: "mapbox://styles/mapbox/streets-v12",
+                center: [2.154007, 41.390205], // Barcelona
+                zoom: 12,
+            });
+
+            // Agregar controles de navegación
+            this.map.addControl(new mapboxgl.NavigationControl());
+
+            // Obtener datos de músicos desde Laravel
+            this.obtenerMusicos();
+        },
+
+        async obtenerMusicos() {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
+                ); // Ajusta la URL según tu API
+                console.log("Datos recibidos de la API:", response.data);
+                this.localMusicos = response.data.musicos; // Asignar datos a la variable local
+                this.agregarMarcadores();
+            } catch (error) {
+                console.error("Error al obtener datos de músicos:", error);
+            }
+        },
+
+        agregarMarcadores() {
+            if (!this.localMusicos || this.localMusicos.length === 0) {
+                console.warn("No hay músicos disponibles para mostrar en el mapa.");
+                return;
+            }
+
+            this.localMusicos.forEach((musico) => {
+                new mapboxgl.Marker({ color: "blue" }) // Marcador azul
+                    .setLngLat([musico.long, musico.lat]) // Mapbox usa [longitud, latitud]
+                    .setPopup(
+                        new mapboxgl.Popup().setHTML(
+                            `<h3>${musico.descripcion}</h3>`
+                        )
+                    ) // Popup con info
+                    .addTo(this.map);
+            });
+        },
     },
 
     beforeDestroy() {
-      if (this.map) {
-        this.map.remove();
-      }
-    }
-  };
-  </script>
+        if (this.map) {
+            this.map.remove();
+        }
+    },
+};
+</script>
 
-  <style scoped>
-  #map {
+<style scoped>
+#map {
     width: 100%;
     height: 500px;
-  }
-  </style>
+}
+</style>

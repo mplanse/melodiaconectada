@@ -1,9 +1,8 @@
-@extends('layouts.layout') <!-- Asegúrate de extender una plantilla base -->
+@extends('layouts.layout')
 
-@section('content') <!-- Abrimos la sección correctamente -->
-
-<div id="mapbox">
-    <mapbox-component></mapbox-component>
+@section('content')
+{{-- @dd($musicos) <!-- Esto mostrará el contenido de $musicos --> --}}
+<div id="app">
+    <map-component ></map-component>
 </div>
-
 @endsection

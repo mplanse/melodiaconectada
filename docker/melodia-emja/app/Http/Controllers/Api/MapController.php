@@ -12,35 +12,39 @@ class MapController extends Controller
 
     public function obtenerCoordenadas()
     {
-        // $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
+        $musicos = Musico::all();
 
-
-        // return response()->json([
-        //     'musicos' => $musicos,
-
-        // ]);
+        return response()->json(['musicos' => $musicos,]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
+    // public function index()
+    // {
+    //     // Obtener los músicos con sus coordenadas y datos relacionados
+    //     $musicos = Musico::with('usuario')->get();
 
-
-        return response()->json([
-            'musicos' => $musicos,
-
-        ]);
-    }
+    //     // Pasar los datos a la vista Blade
+    //     return view('index', compact('musicos'));
+    // }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+        ]);
+
+        $musico = Musico::create($validatedData);
+
+        return response()->json([
+            'message' => 'Marcador guardado correctamente',
+            'musico' => $musico,
+        ]);
     }
 
     /**

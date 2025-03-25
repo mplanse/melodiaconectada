@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MapController;
-use App\Http\Controllers\Api\EventoController;
+use App\Http\Controllers\EventoController;
 
 
 
@@ -23,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('Mapa',MapController::class);
+Route::apiResource('mapa', MapController::class);
+
+Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
