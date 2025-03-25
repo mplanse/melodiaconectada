@@ -32,7 +32,7 @@ Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.
 Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
 Route::get('/events/{id}', [EventoController::class, 'evento_individual']);
 
-
+Route::get('/seleccion-rol', [RegisterController::class, 'seleccionRol'])->name('seleccion.rol');
 Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
