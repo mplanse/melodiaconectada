@@ -12,11 +12,9 @@ class MapController extends Controller
 
     public function obtenerCoordenadas()
     {
-        $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
+        $musicos = Musico::all();
 
-        return response()->json([
-            'musicos' => $musicos,
-        ]);
+        return response()->json(['musicos' => $musicos,]);
     }
 
     /**

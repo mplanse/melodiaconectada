@@ -33,12 +33,12 @@ Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('even
 Route::get('/events/{id}', [EventoController::class, 'evento_individual']);
 
 
-// Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
-// Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-// Route::get('/login', [LoginController::class, 'show'])->name('login.show');
-// Route::post('/login', [LoginController::class, 'login'])->name('login');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.index');
 
