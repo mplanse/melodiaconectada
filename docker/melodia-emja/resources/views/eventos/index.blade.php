@@ -35,12 +35,12 @@
                         </td>
                         <td>
                             <a href="{{ route('eventos.show', $evento->idEventos) }}" class="btn btn-info btn-sm">Ver</a>
-                            <a href="{{ route('eventos.edit', $evento->idEventos) }}" class="btn btn-warning btn-sm">Editar</a>
+                            {{-- <a href="{{ route('eventos.edit', $evento->idEventos) }}" class="btn btn-warning btn-sm">Editar</a>
                             <form action="{{ route('eventos.destroy', $evento->idEventos) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este evento?')">Eliminar</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach

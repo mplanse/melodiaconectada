@@ -30,7 +30,8 @@ Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store
 Route::get('/eventos/{id}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.update');
 Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
-Route::get('/events/{id}', [EventoController::class, 'evento_individual']);
+Route::get('/eventos/{id}', [EventoController::class, 'evento_individual'])->name('eventos.show');
+
 
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
