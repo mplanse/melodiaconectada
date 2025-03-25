@@ -22,14 +22,14 @@ class MapController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Obtener los músicos con sus coordenadas y datos relacionados
-        $musicos = Musico::with('usuario')->get();
+    // public function index()
+    // {
+    //     // Obtener los músicos con sus coordenadas y datos relacionados
+    //     $musicos = Musico::with('usuario')->get();
 
-        // Pasar los datos a la vista Blade
-        return view('index', compact('musicos'));
-    }
+    //     // Pasar los datos a la vista Blade
+    //     return view('index', compact('musicos'));
+    // }
 
     /**
      * Store a newly created resource in storage.
