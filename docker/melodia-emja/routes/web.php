@@ -24,7 +24,14 @@ Route::get('/mapa', function () {
     return view('mapa.mapa');
 });
 
-Route::resource('eventos', EventoController::class);
+Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
+Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
+Route::get('/eventos/{id}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
+Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.update');
+Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
+Route::get('/events/{id}', [EventoController::class, 'evento_individual']);
+
 
 // Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
 // Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -37,6 +44,8 @@ Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.
 
 Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
 Route::post('/mensajes', [MensajeController::class, 'store'])->name('mensajes.store');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {

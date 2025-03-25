@@ -6,22 +6,17 @@
 
   <script>
   import mapboxgl from 'mapbox-gl';
+  import axios from 'axios';
   import 'mapbox-gl/dist/mapbox-gl.css';
 
   export default {
-    name: "MapComponent",
-    props: {
-      usuario: {
-        type: Array,
-        required: true,
-        default: () => [],
-      },
-    },
     data() {
       return {
         map: null,
+        musicos: []
       };
     },
+
     mounted() {
       this.initializeMap();
     },
@@ -29,31 +24,47 @@
       initializeMap() {
         mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w';
 
-        this.map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v12',
-          center: [2.154007, 41.390205], // Centro inicial (Barcelona)
-          zoom: 12,
-        });
+      // Inicializa el mapa
+      this.map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [2.154007, 41.390205], // Barcelona
+        zoom: 12
+      });
 
-        // Espera a que el mapa esté cargado antes de agregar marcadores
-        this.map.on('load', () => {
-          this.addMarkers();
-        });
-      },
-      addMarkers() {
-        this.users.forEach(user => {
-          if (user.lat && user.long) {
-            new mapboxgl.Marker()
-              .setLngLat([user.long, user.lat]) // Coordenadas del usuario
-              .setPopup(new mapboxgl.Popup().setHTML(`<h3>${user.usuario.nombre}</h3><p>${user.descripcion}</p>`)) // Información del usuario
-              .addTo(this.map);
-          } else {
-            console.warn(`Coordenadas inválidas para el usuario: ${user.usuario.nombre}`);
-          }
-        });
-      },
+      // Agregar controles de navegación
+      this.map.addControl(new mapboxgl.NavigationControl());
+
+      // Obtener datos de músicos desde Laravel
+      this.obtenerMusicos();
     },
+
+    methods: {
+      async obtenerMusicos() {
+        try {
+          const response = await axios.get('http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas'); // Ajusta la URL según tu API
+          this.musicos = response.data.musicos;
+          this.agregarMarcadores();
+        } catch (error) {
+          console.error('Error al obtener datos de músicos:', error);
+        }
+      },
+
+      agregarMarcadores() {
+        this.musicos.forEach(musico => {
+          new mapboxgl.Marker({ color: "blue" }) // Marcador azul
+            .setLngLat([musico.long, musico.lat]) // Mapbox usa [longitud, latitud]
+            .setPopup(new mapboxgl.Popup().setHTML(`<h3>${musico.descripcion}</h3>`)) // Popup con info
+            .addTo(this.map);
+        });
+      }
+    },
+
+    beforeDestroy() {
+      if (this.map) {
+        this.map.remove();
+      }
+    }
   };
   </script>
 
