@@ -19,7 +19,8 @@ export default {
     data() {
         return {
             map: null,
-            localMusicos: [], // Variable local para almacenar los datos de la API
+            localMusicos: [], // Almacena datos de la API
+            marcadorImagen: "/docker/melodia-emja/public/img/notaMapa.png", // Imagen fija para todos
         };
     },
 
@@ -32,7 +33,6 @@ export default {
             mapboxgl.accessToken =
                 "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
 
-            // Inicializa el mapa
             this.map = new mapboxgl.Map({
                 container: "map",
                 style: "mapbox://styles/mapbox/streets-v12",
@@ -40,10 +40,8 @@ export default {
                 zoom: 12,
             });
 
-            // Agregar controles de navegación
             this.map.addControl(new mapboxgl.NavigationControl());
 
-            // Obtener datos de músicos desde Laravel
             this.obtenerMusicos();
         },
 
@@ -51,9 +49,9 @@ export default {
             try {
                 const response = await axios.get(
                     "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
-                ); // Ajusta la URL según tu API
+                );
                 console.log("Datos recibidos de la API:", response.data);
-                this.localMusicos = response.data.musicos; // Asignar datos a la variable local
+                this.localMusicos = response.data.musicos;
                 this.agregarMarcadores();
             } catch (error) {
                 console.error("Error al obtener datos de músicos:", error);
@@ -67,13 +65,27 @@ export default {
             }
 
             this.localMusicos.forEach((musico) => {
-                new mapboxgl.Marker({ color: "blue" }) // Marcador azul
-                    .setLngLat([musico.long, musico.lat]) // Mapbox usa [longitud, latitud]
-                    .setPopup(
-                        new mapboxgl.Popup().setHTML(
-                            `<h3>${musico.descripcion}</h3>`
-                        )
-                    ) // Popup con info
+                // Crear un elemento div para el marcador con una imagen fija
+                const el = document.createElement("div");
+                el.className = "marker";
+                el.style.backgroundImage = `url(${this.marcadorImagen})`; // Imagen fija
+                el.style.width = "40px";
+                el.style.height = "40px";
+                el.style.backgroundSize = "cover";
+                el.style.borderRadius = "50%";
+                el.style.cursor = "pointer";
+
+                // Evento click para mostrar información
+                el.addEventListener("click", () => {
+                    new mapboxgl.Popup()
+                        .setLngLat([musico.long, musico.lat])
+                        .setHTML(`<h3>${musico.descripcion}</h3>`)
+                        .addTo(this.map);
+                });
+
+                // Agregar el marcador al mapa
+                new mapboxgl.Marker(el)
+                    .setLngLat([musico.long, musico.lat])
                     .addTo(this.map);
             });
         },
@@ -91,5 +103,14 @@ export default {
 #map {
     width: 100%;
     height: 500px;
+}
+
+/* Estilo de los marcadores personalizados */
+.marker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 </style>
