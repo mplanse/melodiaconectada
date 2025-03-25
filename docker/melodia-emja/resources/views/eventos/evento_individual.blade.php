@@ -1,9 +1,12 @@
 @extends('layouts.layout')
 
 @section('content')
-
 <div class="container mt-5" id="app">
-    <event-detail :event-id="{{ json_encode($id) }}"></event-detail>
+    <event-detail
+    :eventid="{{ json_encode($id) }}"
+    event-url="{{ url('/eventos') }}">
+</event-detail>
+
 </div>
 
 <!-- Vue.js -->
@@ -13,7 +16,7 @@
 
 <script>
     Vue.component('event-detail', {
-        props: ['eventId'],
+        props: ['eventid','eventUrl'],
         data() {
             return {
                 event: null,
@@ -22,7 +25,7 @@
             };
         },
         mounted() {
-            axios.get(`/api/events/${this.eventId}`)
+            axios.get(this.eventUrl + '/' + this.eventid)
                 .then(res => {
                     this.event = res.data;
                 })
@@ -43,14 +46,14 @@
                 </div>
 
                 <div v-else-if="error" class="alert alert-danger">
-                    {{ error }}
+                    @{{ error }}
                 </div>
 
                 <div v-else-if="event">
-                    <h2>{{ event.nombreEvento }}</h2>
-                    <p><strong>Descripción:</strong> {{ event.descripcion }}</p>
-                    <p><strong>Fecha:</strong> {{ event.fecha }}</p>
-                    <p><strong>Precio:</strong> {{ event.precio }} €</p>
+                    <h2>@{{ event.nombreEvento }}</h2>
+                    <p><strong>Descripción:</strong> @{{ event.descripcion }}</p>
+                    <p><strong>Fecha:</strong> @{{ event.fecha }}</p>
+                    <p><strong>Precio:</strong> @{{ event.precio }} €</p>
 
                     <div v-if="event.urlMultimedia">
                         <img :src="event.urlMultimedia" alt="Imagen del evento" class="img-fluid rounded" style="max-width: 300px;">
@@ -65,5 +68,4 @@
         el: '#app'
     });
 </script>
-
 @endsection
