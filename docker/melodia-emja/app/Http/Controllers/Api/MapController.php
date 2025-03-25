@@ -12,13 +12,13 @@ class MapController extends Controller
 
     public function obtenerCoordenadas()
     {
-        $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
+        // $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
 
 
-        return response()->json([
-            'musicos' => $musicos,
+        // return response()->json([
+        //     'musicos' => $musicos,
 
-        ]);
+        // ]);
     }
 
     /**
@@ -26,7 +26,13 @@ class MapController extends Controller
      */
     public function index()
     {
-        //
+        $musicos = Musico::select('idMusico', 'descripcion', 'lat', 'long')->get();
+
+
+        return response()->json([
+            'musicos' => $musicos,
+
+        ]);
     }
 
     /**
