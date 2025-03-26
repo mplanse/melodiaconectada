@@ -20,7 +20,7 @@ export default {
         return {
             map: null,
             localMusicos: [], // Almacena datos de la API
-            marcadorImagen: "/docker/melodia-emja/public/img/notaMapa.png", // Imagen fija para todos
+            marcadorImagen: "/public/img/notaMapa.png", // Imagen fija para todos
         };
     },
 
