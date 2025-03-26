@@ -19,8 +19,7 @@ export default {
     data() {
         return {
             map: null,
-            localMusicos: [], // Almacena datos de la API
-            marcadorImagen: "/public/img/notaMapa.png", // Imagen fija para todos
+            localMusicos: [], // Variable local para almacenar los datos de la API
         };
     },
 
@@ -33,6 +32,7 @@ export default {
             mapboxgl.accessToken =
                 "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
 
+
             this.map = new mapboxgl.Map({
                 container: "map",
                 style: "mapbox://styles/mapbox/streets-v12",
@@ -40,7 +40,9 @@ export default {
                 zoom: 12,
             });
 
+
             this.map.addControl(new mapboxgl.NavigationControl());
+
 
             this.obtenerMusicos();
         },
@@ -65,27 +67,13 @@ export default {
             }
 
             this.localMusicos.forEach((musico) => {
-                // Crear un elemento div para el marcador con una imagen fija
-                const el = document.createElement("div");
-                el.className = "marker";
-                el.style.backgroundImage = `url(${this.marcadorImagen})`; // Imagen fija
-                el.style.width = "40px";
-                el.style.height = "40px";
-                el.style.backgroundSize = "cover";
-                el.style.borderRadius = "50%";
-                el.style.cursor = "pointer";
-
-                // Evento click para mostrar información
-                el.addEventListener("click", () => {
-                    new mapboxgl.Popup()
-                        .setLngLat([musico.long, musico.lat])
-                        .setHTML(`<h3>${musico.descripcion}</h3>`)
-                        .addTo(this.map);
-                });
-
-                // Agregar el marcador al mapa
-                new mapboxgl.Marker(el)
+                new mapboxgl.Marker({ color: "blue" })
                     .setLngLat([musico.long, musico.lat])
+                    .setPopup(
+                        new mapboxgl.Popup().setHTML(
+                            `<h3>${musico.descripcion}</h3>`
+                        )
+                    ) 
                     .addTo(this.map);
             });
         },
@@ -103,14 +91,5 @@ export default {
 #map {
     width: 100%;
     height: 500px;
-}
-
-/* Estilo de los marcadores personalizados */
-.marker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 </style>
