@@ -39,7 +39,7 @@
     methods: {
       async obtenerMusicos() {
         try {
-          const response = await axios.get('http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas'); // Ajusta la URL según tu API
+          const response = await axios.get('obtener-coordenadas'); // Ajusta la URL según tu API
           this.musicos = response.data.musicos;
           this.agregarMarcadores();
         } catch (error) {
