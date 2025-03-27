@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrato;
 use Illuminate\Http\Request;
-use App\Models\Musico;
 
-class MusicoController extends Controller
+class ContratoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MusicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Contrato $contrato)
     {
         //
     }
@@ -42,7 +42,7 @@ class MusicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Contrato $contrato)
     {
         //
     }
@@ -50,7 +50,7 @@ class MusicoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Contrato $contrato)
     {
         //
     }
@@ -58,15 +58,8 @@ class MusicoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Contrato $contrato)
     {
         //
     }
-
-      // Obtener contratos del músico
-      public function obtenerContratos($idMusico)
-      {
-          $musico = Musico::with('contratos.restaurante')->findOrFail($idMusico);
-          return response()->json($musico->contratos);
-      }
 }

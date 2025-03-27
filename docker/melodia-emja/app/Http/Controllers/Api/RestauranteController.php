@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RestauranteResource;
 use App\Models\Restaurante;
+use App\Models\Contrato;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -49,5 +50,36 @@ class RestauranteController extends Controller
     public function destroy(Restaurante $restaurante)
     {
         //
+    }
+
+    // Crear contrato
+    public function crearContrato(Request $request)
+    {
+        $request->validate([
+            'idMusico' => 'required|exists:musicos,idMusico',
+            'idRestaurante' => 'required|exists:restaurantes,idRestaurante',
+            'fechaContrato' => 'required|date',
+            'precioContrato' => 'required|numeric|min:0'
+        ]);
+
+        $contrato = Contrato::create([
+            'idMusico' => $request->idMusico,
+            'idRestaurante' => $request->idRestaurante,
+            'fechaContrato' => $request->fechaContrato,
+            'activo' => true,
+            'precioContrato' => $request->precioContrato
+        ]);
+
+        return response()->json(['message' => 'Contrato creado correctamente', 'contrato' => $contrato]);
+    }
+
+    // Cancelar contrato
+    public function cancelarContrato($idContrato)
+    {
+        $contrato = Contrato::findOrFail($idContrato);
+        $contrato->activo = false;
+        $contrato->save();
+
+        return response()->json(['message' => 'Contrato cancelado correctamente']);
     }
 }
