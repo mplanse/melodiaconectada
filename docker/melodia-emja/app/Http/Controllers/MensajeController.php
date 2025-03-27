@@ -1,85 +1,73 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Mensaje;
 use App\Models\Usuario;
+use App\Models\Origen;
+use App\Models\Destino;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MensajeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        // Obtener el ID del usuario autenticado
-        $userId = auth()->id();
+        $currentUserId = Auth::id();
+        $usuarios = Usuario::where('idUsuario', '!=', $currentUserId)->get();
 
-        // Obtener los usuarios (si es necesario para la vista)
-        $usuarios = Usuario::all();
-
-        // Obtener los mensajes del usuario autenticado (como origen o destino)
-        $mensajes = Mensaje::where('origen_usuarios_idUsuario', $userId)
-            ->orWhere('destino_usuarios_idUsuario', $userId)
-            ->orderBy('timestamp', 'desc')
+        if ($request->filled('user_id')) {
+            $otherUserId = $request->input('user_id');
+            $otherUser   = Usuario::findOrFail($otherUserId);
+            // Ordenamos en forma ascendente para que lo más antiguo quede primero
+            $mensajes = Mensaje::whereRaw(
+                '(origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?) OR (origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?)',
+                [$currentUserId, $otherUserId, $otherUserId, $currentUserId]
+            )
+            ->orderBy('timestamp', 'asc')
             ->get();
 
-        return view('mensajes.index', compact('mensajes', 'usuarios', 'userId'));
+            return view('mensajes.conversation', compact('mensajes', 'usuarios', 'currentUserId', 'otherUserId', 'otherUser'));
+        }
+
+        return view('mensajes.index', compact('usuarios', 'currentUserId'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'origen_usuarios_idUsuario' => 'required|integer',
-            'destino_usuarios_idUsuario' => 'required|integer',
-            'mensaje' => 'required|string|max:255',
+        $data = $request->validate([
+            'origen_usuarios_idUsuario'  => 'required|integer|exists:usuarios,idUsuario',
+            'destino_usuarios_idUsuario' => 'required|integer|exists:usuarios,idUsuario',
+            'texto_mensaje'              => 'required|string|max:255',
         ]);
 
-        Mensaje::create($validatedData);
+        // Con firstOrCreate se asegura de que exista el registro en "origen" y "destino"
+        Origen::firstOrCreate(['usuarios_idUsuario' => $data['origen_usuarios_idUsuario']]);
+        Destino::firstOrCreate(['usuarios_idUsuario' => $data['destino_usuarios_idUsuario']]);
 
-        return redirect()->route('mensajes.index', ['user_id' => $request->origen_usuarios_idUsuario]);
+        // Se crea el mensaje directamente (recordar que en el modelo no usamos timestamps de Laravel)
+        Mensaje::create([
+            'origen_usuarios_idUsuario'  => $data['origen_usuarios_idUsuario'],
+            'destino_usuarios_idUsuario' => $data['destino_usuarios_idUsuario'],
+            'texto_mensaje'              => $data['texto_mensaje'],
+            'timestamp'                  => now(),
+        ]);
+
+        return redirect()->route('mensajes.index', ['user_id' => $data['destino_usuarios_idUsuario']]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function conversation($userId)
     {
-        //
-    }
+        $currentUserId = Auth::id();
+        $otherUser     = Usuario::findOrFail($userId);
+        $mensajes = Mensaje::whereRaw(
+            '(origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?) OR (origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?)',
+            [$currentUserId, $userId, $userId, $currentUserId]
+        )
+        ->orderBy('timestamp', 'asc')
+        ->get();
+        $usuarios = Usuario::where('idUsuario', '!=', $currentUserId)->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('mensajes.conversation', compact('mensajes', 'usuarios', 'currentUserId', 'otherUser', 'userId', 'otherUserId'));
     }
 }

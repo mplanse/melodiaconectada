@@ -47,7 +47,6 @@ Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.index');
 
 Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
 Route::post('/mensajes', [MensajeController::class, 'store'])->name('mensajes.store');
