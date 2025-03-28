@@ -18,9 +18,9 @@ class Restaurante extends Model
         return $this->hasMany(Evento::class, 'restaurantes_idRestaurante', 'idRestaurante');
     }
 
-    public function contratos()
-{
-    return $this->hasMany(Contrato::class, 'idRestaurante', 'idRestaurante');
-}
+    public function contrato()
+    {
+        return $this->hasOne(Contrato::class, 'idRestaurante', 'idRestaurante');
+    }
 
 }

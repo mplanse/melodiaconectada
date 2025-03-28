@@ -24,9 +24,9 @@ class Musico extends Model
         return $this->belongsTo(Usuario::class, 'idMusico', 'idUsuario');
     }
 
-    public function contratos()
-{
-    return $this->hasMany(Contrato::class, 'idMusico', 'idMusico');
-}
+    public function contrato()
+    {
+        return $this->hasOne(Contrato::class, 'idMusico', 'idMusico');
+    }
 
 }
