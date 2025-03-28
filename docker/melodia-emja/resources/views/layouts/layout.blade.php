@@ -24,6 +24,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('eventos.index') }}">Eventos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('mensajes.index') }}">Chat</a>
+                    </li>
+                </ul>
                 </ul>
             </div>
         </div>

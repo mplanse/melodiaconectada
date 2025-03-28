@@ -15,7 +15,7 @@
         <h1>"BeatBite: Donde la música en vivo encuentra su escenario perfecto."</h1>
         <div class="botones">
             <a href="{{ route('login') }}" class="btn btn-iniciar">Iniciar sesión</a>
-            <a href="{{ route('register') }}" class="btn btn-registrar">Registrarse</a>
+            <a href="{{ route('seleccion.rol') }}" class="btn btn-registrar">Registrarse</a>
         </div>
         <div class="flecha">
             <a href="#flecha_direccion">&#9660;</a>

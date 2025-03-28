@@ -11,14 +11,28 @@ class Mensaje extends Model
     protected $table = 'mensajes';
     protected $primaryKey = 'idMensaje';
     public $timestamps = false;
-    
-    public function origen()
+    protected $fillable = [
+        'origen_usuarios_idUsuario',
+        'destino_usuarios_idUsuario',
+        'texto_mensaje',
+        'timestamp'
+    ];
+
+    // Relationship to sender user
+    public function remitente()
     {
-        return $this->belongsTo(Origen::class, 'origen_usuarios_idUsuario', 'usuarios_idUsuario');
+        return $this->belongsTo(Usuario::class, 'origen_usuarios_idUsuario', 'idUsuario');
     }
-    
-    public function destino()
+
+    // Relationship to recipient user
+    public function destinatario()
     {
-        return $this->belongsTo(Destino::class, 'destino_usuarios_idUsuario', 'usuarios_idUsuario');
+        return $this->belongsTo(Usuario::class, 'destino_usuarios_idUsuario', 'idUsuario');
+    }
+
+    // Add a timestamp setter for easier message creation
+    public function setTimeStampAttributes()
+    {
+        $this->timestamp = now();
     }
 }

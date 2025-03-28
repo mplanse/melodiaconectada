@@ -41,6 +41,18 @@ export default {
             });
 
 
+    methods: {
+      async obtenerMusicos() {
+        try {
+          const response = await axios.get('obtener-coordenadas'); // Ajusta la URL según tu API
+          this.musicos = response.data.musicos;
+          this.agregarMarcadores();
+        } catch (error) {
+          console.error('Error al obtener datos de músicos:', error);
+        }
+      },
+
+
             this.map.addControl(new mapboxgl.NavigationControl());
 
 
