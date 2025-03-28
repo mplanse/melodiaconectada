@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Multimedia;
 use Illuminate\Http\Request;
 
 class MultimediaController extends Controller
@@ -27,7 +28,28 @@ class MultimediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'usuaris_idusuaris' => 'required|exists:usuaris,idusuaris',
+        ]);
+
+        $file = $request->file('imagen');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $ruta = $file->storeAs('public/multimedia', $filename);
+
+        $multimedia = Multimedia::create([
+            'nombre' => $filename,
+            'ruta' => $ruta,
+            'usuaris_idusuaris' => $request->usuaris_idusuaris,
+        ]);
+
+        return response()->json(['message' => 'Imagen guardada', 'data' => $multimedia], 201);
+    }
+
+    public function getUserImages($id)
+    {
+        $imagenes = Multimedia::where('usuaris_idusuaris', $id)->get();
+        return response()->json($imagenes);
     }
 
     /**
