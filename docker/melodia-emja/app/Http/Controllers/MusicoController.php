@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Musico;
 
 class MusicoController extends Controller
 {
@@ -61,4 +62,11 @@ class MusicoController extends Controller
     {
         //
     }
+
+      // Obtener contratos del músico
+      public function obtenerContratos($idMusico)
+      {
+          $musico = Musico::with('contratos.restaurante')->findOrFail($idMusico);
+          return response()->json($musico->contratos);
+      }
 }

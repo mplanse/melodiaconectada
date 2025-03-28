@@ -12,9 +12,15 @@ class Restaurante extends Model
     protected $primaryKey = 'idRestaurante';
     public $timestamps = false;
     protected $fillable = ['direccion'];
-    
+
     public function eventos()
     {
         return $this->hasMany(Evento::class, 'restaurantes_idRestaurante', 'idRestaurante');
     }
+
+    public function contratos()
+{
+    return $this->hasMany(Contrato::class, 'idRestaurante', 'idRestaurante');
+}
+
 }
