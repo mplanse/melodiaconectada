@@ -5,6 +5,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\PerfilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +33,15 @@ Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store
 Route::get('/eventos/{id}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.update');
 Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
-Route::get('/eventos/{id}', [EventoController::class, 'evento_individual'])->name('eventos.show');
+// Esta es para JSON
+Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.json');
+
+// Esta es para la vista con Vue
+Route::get('/eventos/ver/{id}', [EventoController::class, 'evento_individual'])->name('eventos.show');
 
 
 
+Route::get('/seleccion-rol', [RegisterController::class, 'seleccionRol'])->name('seleccion.rol');
 Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
@@ -43,7 +49,6 @@ Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.index');
 
 Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
 Route::post('/mensajes', [MensajeController::class, 'store'])->name('mensajes.store');
@@ -54,4 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('layouts.layout');
     })->name('home');
+    Route::get('/perfil', [PerfilController::class, 'edit'])->name('perfil.edit');
+    Route::put('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
 });
+

@@ -51,19 +51,16 @@ export default {
             this.obtenerDirecciones();
         },
 
-        // Obtiene los datos de músicos desde el backend
-        async obtenerMusicos() {
-            try {
-                const response = await axios.get(
-                    "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
-                ); // Ajusta la URL según tu API
-                console.log("Datos recibidos de músicos:", response.data);
-                this.localMusicos = response.data.musicos; // Asignar datos a la variable local
-                this.agregarMarcadoresMusicos();
-            } catch (error) {
-                console.error("Error al obtener datos de músicos:", error);
-            }
-        },
+    methods: {
+      async obtenerMusicos() {
+        try {
+          const response = await axios.get('obtener-coordenadas'); // Ajusta la URL según tu API
+          this.musicos = response.data.musicos;
+          this.agregarMarcadores();
+        } catch (error) {
+          console.error('Error al obtener datos de músicos:', error);
+        }
+      },
 
         // Agrega marcadores para los músicos
         agregarMarcadoresMusicos() {

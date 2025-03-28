@@ -1,9 +1,12 @@
 @extends('layouts.layout')
 
 @section('content')
-
 <div class="container mt-5" id="app">
-    <event-detail :event-id="{{ json_encode($id) }}"></event-detail>
+    <event-detail
+    :eventid="{{ json_encode($id) }}"
+    event-url="{{ url('/eventos') }}">
+</event-detail>
+
 </div>
 
 <!-- Vue.js -->
@@ -13,7 +16,7 @@
 
 <script>
     Vue.component('event-detail', {
-        props: ['eventId'],
+        props: ['eventid','eventUrl'],
         data() {
             return {
                 event: null,
@@ -22,7 +25,7 @@
             };
         },
         mounted() {
-            axios.get(`http://localhost/melodiaconectada/docker/melodia-emja/public/api/events/1`)
+            axios.get(this.eventUrl + '/' + this.eventid)
                 .then(res => {
                     this.event = res.data;
                 })
@@ -65,5 +68,4 @@
         el: '#app'
     });
 </script>
-
 @endsection
