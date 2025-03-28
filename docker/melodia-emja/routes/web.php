@@ -23,7 +23,9 @@ Route::get('/', function () {
 Route::get('/mapa', function () {
     return view('mapa.mapa');
 });
-
+Route::get('/locales', function () {
+    return view('mapa.locales');
+});
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
 Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
 Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');

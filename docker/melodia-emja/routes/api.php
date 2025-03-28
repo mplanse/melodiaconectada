@@ -26,3 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('mapa', MapController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
+Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);

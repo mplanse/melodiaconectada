@@ -17,6 +17,20 @@ class MapController extends Controller
         return response()->json(['musicos' => $musicos,]);
     }
 
+    public function obtenerDirecciones()
+{
+    $restaurantes = Restaurante::all();
+
+    // Procesar cada restaurante para agregar coordenadas (opcional)
+    $restaurantesConDatos = $restaurantes->map(function ($restaurante) {
+        return [
+            'id' => $restaurante->usuarios_idUsuario,
+            'direccion' => $restaurante->direccion,
+        ];
+    });
+
+    return response()->json(['restaurantes' => $restaurantesConDatos]);
+}
     /**
      * Display a listing of the resource.
      */

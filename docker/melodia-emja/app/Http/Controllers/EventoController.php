@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use App\Models\Evento; // Importa el modelo
 
@@ -22,7 +23,9 @@ class EventoController extends Controller
      */
     public function create()
     {
-        //
+        $restaurantes = Restaurante::all();
+
+        return view('eventos.create', compact('restaurantes'));
     }
 
     /**
@@ -30,7 +33,28 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos del formulario
+        $request->validate([
+            'nombreEvento' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'urlMultimedia' => 'nullable|url|max:255',
+            'fecha' => 'required|date',
+            'precio' => 'required|integer|min:0',
+            'restaurantes_idRestaurante' => 'required|exists:restaurantes,idRestaurante',
+        ]);
+
+        // Crear el evento
+        Evento::create([
+            'nombreEvento' => $request->nombreEvento,
+            'descripcion' => $request->descripcion,
+            'urlMultimedia' => $request->urlMultimedia,
+            'fecha' => $request->fecha,
+            'precio' => $request->precio,
+            'restaurantes_idRestaurante' => $request->restaurantes_idRestaurante,
+        ]);
+
+        // Redireccionar con un mensaje de éxito
+        return redirect()->route('eventos.create')->with('success', '¡El evento ha sido creado exitosamente!');
     }
 
     /**
