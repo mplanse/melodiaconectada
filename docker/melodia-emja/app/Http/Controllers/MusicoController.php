@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Musico;
 
 class MusicoController extends Controller
 {
@@ -61,4 +62,15 @@ class MusicoController extends Controller
     {
         //
     }
+
+      // Obtener contratos del músico
+      public function verContrato($idMusico)
+{
+    $musico = Musico::with('contrato.restaurante')->find($idMusico);
+    if (!$musico || !$musico->contrato) {
+        return response()->json(['error' => 'Este músico no tiene contrato'], 404);
+    }
+    return response()->json($musico->contrato);
+}
+
 }

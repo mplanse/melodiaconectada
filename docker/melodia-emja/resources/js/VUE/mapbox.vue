@@ -43,7 +43,6 @@ export default {
                 zoom: 12,
             });
 
-            // Agregar controles de navegación
             this.map.addControl(new mapboxgl.NavigationControl());
 
             // Obtener datos de músicos y restaurantes
@@ -79,7 +78,7 @@ export default {
                         new mapboxgl.Popup().setHTML(
                             `<h3>${musico.descripcion}</h3>`
                         )
-                    ) // Popup con info
+                    )
                     .addTo(this.map);
             });
         },

@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\Contrato;
+use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MultimediaController;
 
 
 
+use App\Http\Controllers\api\ContratoController;
+use App\Http\Controllers\Api\RestauranteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +30,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('mapa', MapController::class);
+
+
+Route::apiResource('contrato', ContratoController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
 Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
