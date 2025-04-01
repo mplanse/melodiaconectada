@@ -64,9 +64,13 @@ class MusicoController extends Controller
     }
 
       // Obtener contratos del músico
-      public function obtenerContratos($idMusico)
-      {
-          $musico = Musico::with('contratos.restaurante')->findOrFail($idMusico);
-          return response()->json($musico->contratos);
-      }
+      public function verContrato($idMusico)
+{
+    $musico = Musico::with('contrato.restaurante')->find($idMusico);
+    if (!$musico || !$musico->contrato) {
+        return response()->json(['error' => 'Este músico no tiene contrato'], 404);
+    }
+    return response()->json($musico->contrato);
+}
+
 }

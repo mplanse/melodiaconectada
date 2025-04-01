@@ -32,7 +32,6 @@ export default {
             mapboxgl.accessToken =
                 "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
 
-
             this.map = new mapboxgl.Map({
                 container: "map",
                 style: "mapbox://styles/mapbox/streets-v12",
@@ -40,23 +39,9 @@ export default {
                 zoom: 12,
             });
 
-
-    methods: {
-      async obtenerMusicos() {
-        try {
-          const response = await axios.get('obtener-coordenadas'); // Ajusta la URL según tu API
-          this.musicos = response.data.musicos;
-          this.agregarMarcadores();
-        } catch (error) {
-          console.error('Error al obtener datos de músicos:', error);
-        }
-      },
-
-
             this.map.addControl(new mapboxgl.NavigationControl());
 
-
-            this.obtenerMusicos();
+            this.obtenerMusicos(); // Llama a la función para obtener músicos al cargar el mapa
         },
 
         async obtenerMusicos() {
@@ -85,7 +70,7 @@ export default {
                         new mapboxgl.Popup().setHTML(
                             `<h3>${musico.descripcion}</h3>`
                         )
-                    ) 
+                    )
                     .addTo(this.map);
             });
         },
