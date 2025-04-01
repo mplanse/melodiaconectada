@@ -57,9 +57,14 @@
 
                 <!-- Restaurante -->
                 <div class="form-group">
-                    <label for="restaurantes_idRestaurante">Restaurante:</label>
-                    <p>{{ $restaurante->nombre }}</p>
-                    <input type="hidden" name="restaurantes_idRestaurante" value="{{ $restaurante->idRestaurante }}">
+                    <label for="username">Usuario:</label>
+                    <p>{{ $usuario->username }}</p>
+                </div>
+
+                <!-- Username del usuario -->
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <p>{{ $usuario->username }}</p>
                 </div>
 
                 <!-- Botón de envío -->

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Multimedia;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
-use App\Models\Evento; // Importa el modelo
+use App\Models\Evento;
 
 class EventoController extends Controller
 {
@@ -15,7 +15,6 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::paginate(10);
-
         return view('eventos.index', compact('eventos'));
     }
 
@@ -27,63 +26,88 @@ class EventoController extends Controller
     // Obtener el usuario autenticado
     $usuario = auth()->user();
 
-    // Obtener el restaurante asociado al usuario
+    // Verificar que el usuario está autenticado
+    if (!$usuario) {
+        return redirect()->route('login')->with('error', 'Debes iniciar sesión para crear un evento.');
+    }
+
+    // Verificar que el usuario tiene el rol de "Restaurante" (roles_idrol = 2)
+    if ($usuario->roles_idRol != 2) {
+        return redirect()->route('home')->with('error', 'No tienes permisos para crear eventos. Solo los usuarios con rol de Restaurante pueden hacerlo.');
+    }
+
+    // Buscar el restaurante asociado al usuario autenticado usando la relación
     $restaurante = $usuario->restaurante;
 
-    // if (!$restaurante) {
-    //     return view('eventos.create')->with('error', 'No tienes un restaurante asociado. Por favor, crea un restaurante antes de crear un evento.');
-    // }
+    // Verificar si el usuario tiene un restaurante asociado
+    if (!$restaurante) {
+        return view('eventos.crear_eventos')->with('error', 'No tienes un restaurante asociado.');
+    }
 
-    // Pasar el restaurante a la vista
-    return view('eventos.crear_eventos', compact('restaurante'));
+    // Cargar el restaurante con su relación de usuario
+    $restaurante->load('usuario');
+
+    // Pasar el restaurante y el username a la vista
+    return view('eventos.crear_eventos', compact('restaurante', 'usuario'));
 }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validar los datos del formulario
-    $request->validate([
-        'nombreEvento' => 'required|string|max:255',
-        'descripcion' => 'nullable|string|max:255',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar imagen (opcional, máximo 2MB)
-        'fecha' => 'required|date',
-        'precio' => 'required|integer|min:0',
-        'restaurantes_idRestaurante' => 'required|exists:restaurantes,idRestaurante',
-    ]);
+    {
+        // Obtener el usuario autenticado
+        $usuario = auth()->user();
 
-    // Guardar la imagen en la tabla multimedia (si se proporcionó)
-    $multimediaId = null;
-    if ($request->hasFile('imagen')) {
-        $imagen = $request->file('imagen');
-        $nombreImagen = time() . '_' . $imagen->getClientOriginalName(); // Generar un nombre único
-        $rutaImagen = $imagen->storeAs('public/imagenes', $nombreImagen); // Guardar en storage/app/public/imagenes
-        $rutaImagen = str_replace('public/', '', $rutaImagen); // Obtener la ruta relativa
+        // Verificar si el usuario tiene un restaurante asociado
+        $restaurante = $usuario->restaurante;
 
-        // Crear una entrada en la tabla multimedia
-        $multimedia = Multimedia::create([
-            'url' => $rutaImagen,
-            'idPropietario' => auth()->id(), // Asociar con el usuario autenticado
+
+        if (!$restaurante) {
+            return redirect()->back()->with('error', 'No tienes un restaurante asociado.');
+        }
+
+        // Validar los datos del formulario
+        $request->validate([
+            'nombreEvento' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'imagen' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar imagen (opcional, máximo 2MB)
+            'fecha' => 'required|date',
+            'precio' => 'required|integer|min:0',
         ]);
 
-        // Obtener el ID de la entrada creada
-        $multimediaId = $multimedia->idmultimedia;
+        // Guardar la imagen en la tabla multimedia (si se proporcionó)
+        $multimediaId = null;
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName(); // Generar un nombre único
+            $rutaImagen = $imagen->storeAs('public/imagenes', $nombreImagen); // Guardar en storage/app/public/imagenes
+            $rutaImagen = str_replace('public/', '', $rutaImagen); // Obtener la ruta relativa
+
+            // Crear una entrada en la tabla multimedia
+            $multimedia = Multimedia::create([
+                'url' => $rutaImagen,
+                'idPropietario' => $usuario->idUsuario, // Asociar con el usuario autenticado
+            ]);
+
+            // Obtener el ID de la entrada creada
+            $multimediaId = $multimedia->idmultimedia;
+        }
+
+        // Crear el evento
+        Evento::create([
+            'nombreEvento' => $request->nombreEvento,
+            'descripcion' => $request->descripcion,
+            'urlMultimedia' => $multimediaId, // Guardar el ID de la entrada en multimedia
+            'fecha' => $request->fecha,
+            'precio' => $request->precio,
+            'restaurantes_idRestaurante' => $restaurante->idRestaurante,
+        ]);
+
+        // Redireccionar con un mensaje de éxito
+        return redirect()->route('eventos.create')->with('success', '¡El evento ha sido creado exitosamente!');
     }
 
-    // Crear el evento
-    Evento::create([
-        'nombreEvento' => $request->nombreEvento,
-        'descripcion' => $request->descripcion,
-        'urlMultimedia' => $multimediaId, // Guardar el ID de la entrada en multimedia
-        'fecha' => $request->fecha,
-        'precio' => $request->precio,
-        'restaurantes_idRestaurante' => $restaurante->idRestaurante,
-    ]);
-
-    // Redireccionar con un mensaje de éxito
-    return redirect()->route('eventos.create')->with('success', '¡El evento ha sido creado exitosamente!');
-}
     /**
      * Display the specified resource.
      */
@@ -92,11 +116,11 @@ class EventoController extends Controller
         $event = Evento::findOrFail($id);
         return response()->json($event);
     }
+
     public function evento_individual($id)
     {
         return view('eventos.evento_individual', compact('id'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

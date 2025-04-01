@@ -56,7 +56,7 @@
         formData.append("usuaris_idusuaris", 1); // Aquí pones el ID del usuario autenticado
 
         try {
-          let response = await axios.post("/api/multimedia/upload", formData, {
+          let response = await axios.post("http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/guardar-imagen", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
           console.log(response.data);
