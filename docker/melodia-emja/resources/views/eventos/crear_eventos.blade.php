@@ -58,7 +58,7 @@
                 <!-- Restaurante -->
                 <div class="form-group">
                     <label for="username">Usuario:</label>
-                    <p>{{ $usuario->username }}</p>
+                    <p>{{ $usuario->nombre }}</p>
                 </div>
 
                 <!-- Username del usuario -->
