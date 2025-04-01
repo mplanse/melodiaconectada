@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\RestauranteController;
+use App\Http\Controllers\MusicoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,11 +55,24 @@ Route::post('/mensajes', [MensajeController::class, 'store'])->name('mensajes.st
 
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        return view('layouts.layout');
-    })->name('home');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/home', function () {
+//         return view('layouts.layout');
+//     })->name('home');
     Route::get('/perfil', [PerfilController::class, 'edit'])->name('perfil.edit');
     Route::put('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
-});
+
+
+    Route::get('/contrato/crear', [RestauranteController::class, 'mostrarFormularioContrato'])->name('contrato.formulario');
+    Route::post('/contrato/crear', [RestauranteController::class, 'crearContrato'])->name('contrato.crear');
+    Route::post('/contrato/cancelar/{idContrato}', [RestauranteController::class, 'cancelarContrato'])->name('contrato.cancelar');
+
+    Route::get('/musico/{idMusico}/ver-contrato', [MusicoController::class, 'verContrato'])->name('musico.verContrato');
+
+    Route::get('/contrato', function () {
+        return view('contrato'); // Asegúrate de crear este archivo en views
+    })->name('contrato');
+
+
+// });
 

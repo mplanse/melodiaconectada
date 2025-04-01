@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Musico extends Model
 {
     use HasFactory;
@@ -25,8 +24,9 @@ class Musico extends Model
     }
 
     public function contrato()
-    {
-        return $this->hasOne(Contrato::class, 'idMusico', 'idMusico');
-    }
+{
+    return $this->hasOne(Contrato::class, 'idMusico', 'idMusico');
+}
+
 
 }

@@ -26,36 +26,3 @@ class Contrato extends Model
         return $this->belongsTo(Restaurante::class, 'idRestaurante', 'idRestaurante');
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function restaurante()
-    {
-        return $this->belongsTo(Restaurante::class, 'idRestaurante', 'idRestaurante');
-    }
-}
