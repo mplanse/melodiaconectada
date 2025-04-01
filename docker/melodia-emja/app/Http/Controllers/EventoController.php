@@ -97,7 +97,7 @@ class EventoController extends Controller
         'urlMultimedia' => $multimediaId, // Guardar el ID de la entrada en multimedia
         'fecha' => $request->fecha,
         'precio' => $request->precio,
-        'restaurantes_idRestaurante' => $restaurante->usuarios_idUsuario, // Usar usuarios_idUsuario
+        'restaurantes_idRestaurante' => $restaurante->idRestaurante, // Usar usuarios_idUsuario
     ]);
 
     // Redireccionar con un mensaje de éxito

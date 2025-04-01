@@ -21,6 +21,6 @@ class Usuario extends Authenticatable
 
     public function restaurante()
     {
-        return $this->hasOne(Restaurante::class, 'usuarios_idUsuario', 'idUsuario');
+        return $this->hasOne(Restaurante::class, 'idRestaurante', 'idUsuario');
     }
 }

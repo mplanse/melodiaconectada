@@ -5,7 +5,6 @@ use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
-use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MultimediaController;
 
