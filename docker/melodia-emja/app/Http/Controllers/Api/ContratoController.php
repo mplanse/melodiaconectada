@@ -17,7 +17,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        $contrato = Contrato::with(['musico', 'restaurante'])->get();
+        $contrato = Contrato::with(['musico.usuario', 'restaurante.usuario'])->get();
 
         return ContratoResource::collection($contrato) ;
         }
@@ -70,4 +70,19 @@ class ContratoController extends Controller
         $contrato->delete();
         return response()->json(['message' => 'Contrato eliminado con éxito']);
     }
+
+    public function obtenerMusicosYRestaurantes()
+{
+    // Obtén todos los músicos y todos los restaurantes (con sus usuarios si es necesario)
+    $musicos = Musico::with('usuario')->get();
+    $restaurantes = Restaurante::with('usuario')->get();
+
+    // Devuelve los músicos y restaurantes en una sola respuesta
+    return response()->json([
+        'musicos' => $musicos,
+        'restaurantes' => $restaurantes
+    ]);
+}
+
+
 }

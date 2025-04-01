@@ -34,7 +34,9 @@ Route::apiResource('mapa', MapController::class);
 Route::apiResource('contrato', ContratoController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
+
 Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
 
 Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
 Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
+
