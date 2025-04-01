@@ -30,3 +30,5 @@ Route::apiResource('mapa', MapController::class);
 Route::apiResource('contrato', ContratoController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
+
+Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);

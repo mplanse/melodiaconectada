@@ -23,4 +23,9 @@ class Restaurante extends Model
         return $this->hasOne(Contrato::class, 'idRestaurante', 'idRestaurante');
     }
 
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'idRestaurante', 'idUsuario');
+    }
+
 }

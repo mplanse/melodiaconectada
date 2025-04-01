@@ -1,92 +1,108 @@
 <template>
-    <div>
-        <div id="map" style="width: 100%; height: 500px"></div>
+    <div class="container mt-4">
+      <h2>Crear Contrato</h2>
+
+      <form @submit.prevent="crearContrato">
+        <div class="mb-3">
+          <label for="restaurante" class="form-label">Restaurante</label>
+          <select v-model="contrato.idRestaurante" class="form-select" required>
+            <option v-for="restaurante in restaurantes" :key="restaurante.idRestaurante" :value="restaurante.idRestaurante">
+              {{ restaurante.usuario.nombre }} (ID: {{ restaurante.idRestaurante }})
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="musico" class="form-label">Músico</label>
+          <select v-model="contrato.idMusico" class="form-select" required>
+            <option v-for="musico in musicos" :key="musico.idMusico" :value="musico.idMusico">
+              {{ musico.usuario.nombre }} (ID: {{ musico.idMusico }})
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio</label>
+          <input type="number" v-model="contrato.precioContrato" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input type="date" v-model="contrato.fechaContrato" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Contrato</button>
+      </form>
     </div>
-</template>
+  </template>
 
-<script>
-import mapboxgl from "mapbox-gl";
-import axios from "axios";
-import "mapbox-gl/dist/mapbox-gl.css";
+  <script>
+  import axios from 'axios';
 
-export default {
-    props: {
-        musicos: {
-            type: Array,
-            required: true,
-        },
-    },
+  export default {
     data() {
-        return {
-            map: null,
-            localMusicos: [], // Variable local para almacenar los datos de la API
-        };
-    },
-
-    mounted() {
-        this.initializeMap();
-    },
-
-    methods: {
-        initializeMap() {
-            mapboxgl.accessToken =
-                "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
-
-            this.map = new mapboxgl.Map({
-                container: "map",
-                style: "mapbox://styles/mapbox/streets-v12",
-                center: [2.154007, 41.390205], // Barcelona
-                zoom: 12,
-            });
-
-            this.map.addControl(new mapboxgl.NavigationControl());
-
-            this.obtenerMusicos(); // Llama a la función para obtener músicos al cargar el mapa
-        },
-
-        async obtenerMusicos() {
-            try {
-                const response = await axios.get(
-                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
-                );
-                console.log("Datos recibidos de la API:", response.data);
-                this.localMusicos = response.data.musicos;
-                this.agregarMarcadores();
-            } catch (error) {
-                console.error("Error al obtener datos de músicos:", error);
-            }
-        },
-
-        agregarMarcadores() {
-            if (!this.localMusicos || this.localMusicos.length === 0) {
-                console.warn("No hay músicos disponibles para mostrar en el mapa.");
-                return;
-            }
-
-            this.localMusicos.forEach((musico) => {
-                new mapboxgl.Marker({ color: "blue" })
-                    .setLngLat([musico.long, musico.lat])
-                    .setPopup(
-                        new mapboxgl.Popup().setHTML(
-                            `<h3>${musico.descripcion}</h3>`
-                        )
-                    )
-                    .addTo(this.map);
-            });
-        },
-    },
-
-    beforeDestroy() {
-        if (this.map) {
-            this.map.remove();
+      return {
+        restaurantes: [],
+        musicos: [],
+        contrato: {
+          idRestaurante: '',
+          idMusico: '',
+          fechaContrato: '',
+          precioContrato: ''
         }
+      };
     },
-};
-</script>
+    mounted() {
+      this.obtenerMusicosYRestaurantes();
+    },
+    methods: {
+      async obtenerMusicosYRestaurantes() {
+        try {
+          const response = await axios.get('http://localhost/melodiaconectada/docker/melodia-emja/public/api/musicos-restaurantes');
+          const { musicos, restaurantes } = response.data;
 
-<style scoped>
-#map {
-    width: 100%;
-    height: 500px;
-}
-</style>
+          // Asigna los datos obtenidos a las variables
+          this.musicos = musicos;
+          this.restaurantes = restaurantes;
+        } catch (error) {
+          console.error('Error al obtener músicos y restaurantes:', error);
+        }
+      },
+      async crearContrato() {
+        try {
+          const contratoData = {
+            idMusico: this.contrato.idMusico,
+            idRestaurante: this.contrato.idRestaurante,
+            fechaContrato: this.contrato.fechaContrato,
+            precioContrato: this.contrato.precioContrato
+          };
+
+          console.log('Enviando datos del contrato:', contratoData); // Debug
+
+          const response = await axios.post(
+            'http://localhost/melodiaconectada/docker/melodia-emja/public/api/contrato',
+            contratoData,
+            { headers: { 'Content-Type': 'application/json' } }
+          );
+
+          console.log('Respuesta del servidor:', response.data); // Debug
+          alert('Contrato creado exitosamente');
+          this.contrato = { idRestaurante: '', idMusico: '', fechaContrato: '', precioContrato: '' };
+        } catch (error) {
+          console.error('Error al crear contrato:', error.response ? error.response.data : error);
+          alert('Error al crear contrato. Revisa la consola para más detalles.');
+        }
+      }
+    }
+  };
+  </script>
+
+  <style scoped>
+  .container {
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  </style>

@@ -7,7 +7,7 @@
           <label for="restaurante" class="form-label">Restaurante</label>
           <select v-model="contrato.idRestaurante" class="form-select" required>
             <option v-for="restaurante in restaurantes" :key="restaurante.idRestaurante" :value="restaurante.idRestaurante">
-              {{ restaurante.direccion }} (ID: {{ restaurante.idRestaurante }})
+              {{ restaurante.usuario.nombre }} ( {{ restaurante.idRestaurante }})
             </option>
           </select>
         </div>
@@ -16,7 +16,7 @@
           <label for="musico" class="form-label">Músico</label>
           <select v-model="contrato.idMusico" class="form-select" required>
             <option v-for="musico in musicos" :key="musico.idMusico" :value="musico.idMusico">
-              {{ musico.descripcion }} (ID: {{ musico.idMusico }})
+              {{ musico.usuario.nombre }} ( {{ musico.idMusico }})
             </option>
           </select>
         </div>
