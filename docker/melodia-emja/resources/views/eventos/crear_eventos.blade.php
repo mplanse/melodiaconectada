@@ -55,12 +55,6 @@
                     <input type="number" id="precio" name="precio" class="form-control" min="0" required>
                 </div>
 
-                <!-- Restaurante -->
-                <div class="form-group">
-                    <label for="username">Usuario:</label>
-                    <p>{{ $usuario->nombre }}</p>
-                </div>
-
                 <!-- Username del usuario -->
                 <div class="form-group">
                     <label for="username">Usuario:</label>
