@@ -35,11 +35,15 @@ Route::apiResource('contrato', ContratoController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
 
+<<<<<<< HEAD
 Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
 
 
-Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
+Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
+=======
+// Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
 
-Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
-Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
+// Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
+// Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
 
+>>>>>>> 11347ca399c8d0171bd81cb9d6208f8a8f52c067
