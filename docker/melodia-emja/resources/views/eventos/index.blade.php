@@ -53,6 +53,7 @@
         </div>
     @else
         <p>No hay eventos disponibles.</p>
+        <p>Crear Eventos <a href="{{ route('eventos.create') }}">aquí</a></p>
     @endif
 </div>
 

@@ -13,9 +13,14 @@ class Usuario extends Authenticatable
     protected $primaryKey = 'idUsuario';
     public $timestamps = false;
     protected $fillable = ['username', 'password', 'mail', 'roles_idRol', 'nombre', 'descripcion'];
-    
+
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'roles_idRol', 'idRol');
+    }
+
+    public function restaurante()
+    {
+        return $this->hasOne(Restaurante::class, 'idRestaurante', 'idUsuario');
     }
 }

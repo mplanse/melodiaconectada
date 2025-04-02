@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Api\MapController;
+use App\Http\Controllers\Api\MultimediaController;
+
+
+
 use App\Http\Controllers\api\ContratoController;
 use App\Http\Controllers\Api\RestauranteController;
 
@@ -34,4 +38,8 @@ Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas'])
 Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
 
 
-Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
+Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
+
+Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
+Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
+
