@@ -24,7 +24,7 @@ services:
   # Nginx como proxy inverso
   nginx:
     build:
-      context: ./nginx  # Esto debe apuntar a la carpeta donde está tu configuración de Nginx (dentro de docker)
+      context: ./nginx
     container_name: nginx
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf

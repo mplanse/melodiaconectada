@@ -21,15 +21,7 @@ class MapController extends Controller
 {
     $restaurantes = Restaurante::all();
 
-    // Procesar cada restaurante para agregar coordenadas (opcional)
-    $restaurantesConDatos = $restaurantes->map(function ($restaurante) {
-        return [
-            'id' => $restaurante->usuarios_idUsuario,
-            'direccion' => $restaurante->direccion,
-        ];
-    });
-
-    return response()->json(['restaurantes' => $restaurantesConDatos]);
+    return response()->json(['restaurantes' => $restaurantes]);
 }
     /**
      * Display a listing of the resource.
@@ -47,19 +39,32 @@ class MapController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'lat' => 'required|numeric',
-            'long' => 'required|numeric',
-        ]);
+{
+    $validatedData = $request->validate([
+        'idUsuario' => 'required|integer|exists:usuarios,idUsuario',
+        'lat' => 'required|numeric',
+        'long' => 'required|numeric',
+    ]);
 
-        $musico = Musico::create($validatedData);
+    $musico = Musico::where('idMusico', $validatedData['idUsuario'])->first();
+
+    if ($musico) {
+        // Actualizar coordenadas
+        $musico->lat = $validatedData['lat'];
+        $musico->long = $validatedData['long'];
+        $musico->save();
 
         return response()->json([
-            'message' => 'Marcador guardado correctamente',
+            'message' => 'Ubicación actualizada correctamente',
             'musico' => $musico,
         ]);
+    } else {
+        return response()->json([
+            'message' => 'El usuario no es un músico registrado',
+        ], 404);
     }
+}
+
 
     /**
      * Display the specified resource.

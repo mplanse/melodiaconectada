@@ -1,6 +1,8 @@
 <template>
     <div>
-        <!-- Contenedor del mapa -->
+        <button @click="activarModoAgregar" class="btn btn-primary mb-2">
+            Añadir/Actualizar mi posición
+        </button>
         <div id="map" style="width: 100%; height: 500px"></div>
     </div>
 </template>
@@ -22,6 +24,9 @@ export default {
             map: null, // Referencia al mapa
             localMusicos: [], // Variable local para almacenar los datos de músicos
             restaurantes: [], // Variable local para almacenar los datos de restaurantes
+            modoAgregar: false,
+            marcadorPersonal: null,
+            usuarioId: null, // ID del usuario actual, debería pasarse como prop o por el store
         };
     },
 
@@ -67,7 +72,9 @@ export default {
         // Agrega marcadores para los músicos
         agregarMarcadoresMusicos() {
             if (!this.localMusicos || this.localMusicos.length === 0) {
-                console.warn("No hay músicos disponibles para mostrar en el mapa.");
+                console.warn(
+                    "No hay músicos disponibles para mostrar en el mapa."
+                );
                 return;
             }
 
@@ -88,11 +95,10 @@ export default {
             try {
                 const response = await axios.get(
                     "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
-                ); // Ajusta la URL según tu servidor
+                );
                 console.log("Datos recibidos de restaurantes:", response.data);
-                this.restaurantes = response.data.restaurantes; // Asignar datos a la variable local
+                this.restaurantes = response.data.restaurantes;
 
-                // Iterar sobre cada restaurante y geocodificar su dirección
                 this.restaurantes.forEach((restaurante) => {
                     this.geocodificarDireccion(restaurante);
                 });
@@ -123,14 +129,11 @@ export default {
                         return;
                     }
 
-                    // Extraer las coordenadas
                     const coordinates = data.features[0].center;
 
-                    // Manejar valores nulos para nombre y descripción
-                    const nombreUsuario = restaurante.nombreUsuario || "Sin nombre";
-                    const descripcionUsuario = restaurante.descripcionUsuario || "Sin descripción";
+                    // const nombreUsuario = restaurante.nombreUsuario || "Sin nombre";
+                    // const descripcionUsuario = restaurante.descripcionUsuario || "Sin descripción";
 
-                    // Agregar un marcador rojo para restaurantes
                     new mapboxgl.Marker({ color: "red" })
                         .setLngLat(coordinates)
                         .setPopup(
@@ -142,7 +145,6 @@ export default {
                         )
                         .addTo(this.map);
 
-                    // Ajustar el centro del mapa si es el primer marcador
                     if (this.map.getZoom() === 2) {
                         this.map.setCenter(coordinates);
                         this.map.setZoom(10);
@@ -154,6 +156,10 @@ export default {
                         error
                     );
                 });
+        },
+        activarModoAgregar() {
+            this.modoAgregar = true;
+            alert("Haz clic en el mapa para colocar tu ubicación.");
         },
     },
 
