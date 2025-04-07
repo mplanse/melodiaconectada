@@ -13,12 +13,12 @@ import axios from "axios";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default {
-    props: {
-        musicos: {
-            type: Array,
-            required: true,
-        },
-    },
+    // props: {
+    //     musicos: {
+    //         type: Array,
+    //         required: true,
+    //     },
+    // },
     data() {
         return {
             map: null, // Referencia al mapa
