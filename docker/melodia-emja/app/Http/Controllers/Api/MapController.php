@@ -39,31 +39,33 @@ class MapController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'idUsuario' => 'required|integer|exists:usuarios,idUsuario',
-        'lat' => 'required|numeric',
-        'long' => 'required|numeric',
-    ]);
-
-    $musico = Musico::where('idMusico', $validatedData['idUsuario'])->first();
-
-    if ($musico) {
-        // Actualizar coordenadas
-        $musico->lat = $validatedData['lat'];
-        $musico->long = $validatedData['long'];
-        $musico->save();
-
-        return response()->json([
-            'message' => 'Ubicación actualizada correctamente',
-            'musico' => $musico,
+    {
+        $validatedData = $request->validate([
+            'idUsuario' => 'required|integer|exists:usuarios,idUsuario',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
         ]);
-    } else {
-        return response()->json([
-            'message' => 'El usuario no es un músico registrado',
-        ], 404);
+
+        $usuario = \App\Models\Usuario::find($validatedData['idUsuario']);
+
+        if ($usuario && $usuario->musico) {
+            $musico = $usuario->musico;
+            $musico->lat = $validatedData['lat'];
+            $musico->long = $validatedData['long'];
+            $musico->save();
+
+            return response()->json([
+                'message' => 'Ubicación actualizada correctamente',
+                'musico' => $musico,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'El usuario no es un músico registrado',
+            ], 404);
+        }
     }
-}
+
+
 
 
     /**
