@@ -66,7 +66,32 @@ class MapController extends Controller
         }
     }
 
+    // public function pepe(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'idUsuario' => 'required|integer|exists:usuarios,idUsuario',
+    //         'lat' => 'required|numeric',
+    //         'long' => 'required|numeric',
+    //     ]);
 
+    //     $usuario = Usuario::find($validatedData['idUsuario']);
+
+    //     if ($usuario && $usuario->musico) {
+    //         $musico = $usuario->musico;
+    //         $musico->lat = $validatedData['lat'];
+    //         $musico->long = $validatedData['long'];
+    //         $musico->save();
+
+    //         return response()->json([
+    //             'message' => 'Ubicación actualizada correctamente',
+    //             'musico' => $musico,
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'message' => 'El usuario no es un músico registrado',
+    //         ], 404);
+    //     }
+    // }
 
 
     /**

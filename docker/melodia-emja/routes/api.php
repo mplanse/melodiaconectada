@@ -41,4 +41,5 @@ Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones'])
 Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
 Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
 
+//  Route::post('/pepe', [MapController::class, 'pepe']);
 Route::post('/store', [MapController::class, 'store']);

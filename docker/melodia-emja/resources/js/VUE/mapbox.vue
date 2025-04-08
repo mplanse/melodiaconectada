@@ -38,6 +38,7 @@ export default {
     mounted() {
         if (this.user && this.user.idUsuario) {
             this.usuarioId = this.user.idUsuario;
+            console.log("Usuario ID:", this.usuarioId);
             this.initializeMap();
         } else {
             console.error("No se ha proporcionado el usuario correctamente.");
@@ -186,7 +187,7 @@ export default {
                     .addTo(this.map);
 
                 // Enviar al backend
-                this.enviarUbicacion(lat, lng);
+                this.store(lat, lng);
             });
         },
 
