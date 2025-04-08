@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Musico;
+use App\Models\Usuario;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,7 +47,7 @@ class MapController extends Controller
             'long' => 'required|numeric',
         ]);
 
-        $usuario = \App\Models\Usuario::find($validatedData['idUsuario']);
+        $usuario = Usuario::find($validatedData['idUsuario']);
 
         if ($usuario && $usuario->musico) {
             $musico = $usuario->musico;

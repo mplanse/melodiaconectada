@@ -36,11 +36,9 @@ Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas'])
 
 Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
 
-
-Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
-
 Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
 
 Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
 Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
 
+Route::post('/store', [MapController::class, 'store']);

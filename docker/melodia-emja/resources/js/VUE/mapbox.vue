@@ -47,21 +47,41 @@ export default {
 
     methods: {
         initializeMap() {
-            mapboxgl.accessToken =
-                "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
+    mapboxgl.accessToken =
+        "pk.eyJ1Ijoiam9yZGl0dXMiLCJhIjoiY203d2VoMHgzMDNxcjJxc2Nqd2h3bTN0YyJ9.TcKwh0g8Wl9deYIYYVzK9w";
 
-            this.map = new mapboxgl.Map({
-                container: "map",
-                style: "mapbox://styles/mapbox/streets-v12",
-                center: [2.154007, 41.390205],
-                zoom: 12,
-            });
+    this.map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v12",
+        center: [2.154007, 41.390205], // Barcelona
+        zoom: 12,
+    });
 
-            this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.addControl(new mapboxgl.NavigationControl());
 
-            this.obtenerMusicos();
-            this.obtenerDirecciones();
-        },
+    // 👉 Agregar escucha del clic para añadir marcador personal
+    this.map.on("click", (e) => {
+        if (this.modoAgregar) {
+            const { lng, lat } = e.lngLat;
+
+            // Si ya existe el marcador, lo mueve. Si no, lo crea.
+            if (this.marcadorPersonal) {
+                this.marcadorPersonal.setLngLat([lng, lat]);
+            } else {
+                this.marcadorPersonal = new mapboxgl.Marker({ color: "green" })
+                    .setLngLat([lng, lat])
+                    .addTo(this.map);
+            }
+
+            this.store(lat, lng); // Guardar en la base de datos
+            this.modoAgregar = false; // Desactiva el modo agregar después de usarlo
+        }
+    });
+
+    this.obtenerMusicos();
+    this.obtenerDirecciones();
+},
+
 
         async obtenerMusicos() {
             try {
@@ -170,27 +190,10 @@ export default {
             });
         },
 
-        async enviarUbicacion(lat, long) {
-            try {
-                const response = await axios.post(
-                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/guardar-coordenadas",
-                    {
-                        idUsuario: this.usuarioId,
-                        lat: lat,
-                        long: long,
-                    }
-                );
-                alert("Ubicación actualizada correctamente");
-                console.log("Respuesta del backend:", response.data);
-            } catch (error) {
-                console.error("Error al enviar la ubicación:", error);
-                alert("No se pudo actualizar la ubicación.");
-            }
-        },
-        guardarUbicacion(lat, long) {
+        store(lat, long) {
             axios
                 .post(
-                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/guardar-ubicacion",
+                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/store",
                     {
                         idUsuario: this.usuarioId,
                         lat: lat,
