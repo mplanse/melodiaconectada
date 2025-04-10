@@ -14,8 +14,12 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::paginate(10);
-        return view('eventos.index', compact('eventos'));
+        return view('eventos.index');
+    }
+    public function getEventos()
+    {
+        $eventos = Evento::all();
+        return response()->json($eventos);
     }
 
     /**

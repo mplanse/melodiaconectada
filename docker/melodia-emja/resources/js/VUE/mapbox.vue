@@ -54,13 +54,13 @@ export default {
         async obtenerMusicos() {
             try {
                 const response = await axios.get(
-                    "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
+                    "http://localhost/melodianuevo/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
                 ); // Ajusta la URL según tu API
                 console.log("Datos recibidos de músicos:", response.data);
                 this.localMusicos = response.data.musicos; // Asignar datos a la variable local
                 this.agregarMarcadoresMusicos();
             } catch (error) {
-                console.error("Error al obtener datos de músicos:", error);
+                console.error("Error al obtener datos de músicos:", error.response.data);
             }
         },
 
@@ -76,7 +76,7 @@ export default {
                     .setLngLat([musico.long, musico.lat]) // Mapbox usa [longitud, latitud]
                     .setPopup(
                         new mapboxgl.Popup().setHTML(
-                            `<h3>${musico.descripcion}</h3>`
+                            `<h5>${musico.descripcion}</h5>`
                         )
                     )
                     .addTo(this.map);
@@ -87,7 +87,7 @@ export default {
         async obtenerDirecciones() {
             try {
                 const response = await axios.get(
-                    "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
+                    "http://localhost/melodianuevo/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
                 ); // Ajusta la URL según tu servidor
                 console.log("Datos recibidos de restaurantes:", response.data);
                 this.restaurantes = response.data.restaurantes; // Asignar datos a la variable local
@@ -135,7 +135,7 @@ export default {
                         .setLngLat(coordinates)
                         .setPopup(
                             new mapboxgl.Popup().setHTML(`
-                  <h3>${nombreUsuario}</h3>
+                  <h5>${nombreUsuario}</h5 >
                   <p>Dirección: ${restaurante.direccion}</p>
                   <p>Descripción: ${descripcionUsuario}</p>
                 `)

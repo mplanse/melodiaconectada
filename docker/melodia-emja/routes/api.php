@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MultimediaController;
+use App\Http\Controllers\EventoController;
 
 
 
@@ -33,6 +34,7 @@ Route::apiResource('contrato', ContratoController::class);
 
 Route::get('/obtener-coordenadas', [MapController::class, 'obtenerCoordenadas']);
 
+Route::get('/getEventos', [EventoController::class, 'getEventos'])->name('eventos.getEventos');
 
 Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
 

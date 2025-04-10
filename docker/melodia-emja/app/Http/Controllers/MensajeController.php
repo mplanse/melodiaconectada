@@ -19,7 +19,6 @@ class MensajeController extends Controller
         if ($request->filled('user_id')) {
             $otherUserId = $request->input('user_id');
             $otherUser   = Usuario::findOrFail($otherUserId);
-            // Ordenamos en forma ascendente para que lo más antiguo quede primero
             $mensajes = Mensaje::whereRaw(
                 '(origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?) OR (origen_usuarios_idUsuario = ? AND destino_usuarios_idUsuario = ?)',
                 [$currentUserId, $otherUserId, $otherUserId, $currentUserId]
@@ -41,11 +40,9 @@ class MensajeController extends Controller
             'texto_mensaje'              => 'required|string|max:255',
         ]);
 
-        // Con firstOrCreate se asegura de que exista el registro en "origen" y "destino"
         Origen::firstOrCreate(['usuarios_idUsuario' => $data['origen_usuarios_idUsuario']]);
         Destino::firstOrCreate(['usuarios_idUsuario' => $data['destino_usuarios_idUsuario']]);
 
-        // Se crea el mensaje directamente (recordar que en el modelo no usamos timestamps de Laravel)
         Mensaje::create([
             'origen_usuarios_idUsuario'  => $data['origen_usuarios_idUsuario'],
             'destino_usuarios_idUsuario' => $data['destino_usuarios_idUsuario'],

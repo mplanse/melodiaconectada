@@ -14,7 +14,7 @@ class MapController extends Controller
     {
         $musicos = Musico::all();
 
-        return response()->json(['musicos' => $musicos,]);
+        return response()->json(['musicos' => $musicos]);
     }
 
     public function obtenerDirecciones()
@@ -25,7 +25,7 @@ class MapController extends Controller
     $restaurantesConDatos = $restaurantes->map(function ($restaurante) {
         return [
             'id' => $restaurante->usuarios_idUsuario,
-            'direccion' => $restaurante->direccion,
+            'direccion' => $restaurante->direccion
         ];
     });
 
