@@ -1,7 +1,7 @@
 # Use PHP 8.2 FPM base image
 FROM php:8.2-fpm
 
-# Install system dependencies for Composer and Laravel
+# installar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     zip \
     unzip \
@@ -15,33 +15,27 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer globally
+# Instalar composer goblalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
+# Directorio de trabajo
 WORKDIR /var/www/html
 
-# Copy the composer.json and composer.lock files to install dependencies first
+# Copia de composer.json y composer.lock para las dependencias
 COPY composer.json composer.lock /var/www/html/
 
-# Install Laravel dependencies
+# Instalar dependencias de composer
 RUN composer install --no-interaction --no-scripts --optimize-autoloader
 
-# # Install Node.js dependencies
-# RUN npm install
-
-# # Compile assets with Vite (si planeas usar Vite en el futuro)
-# RUN npm run build
-
-# Copy the rest of the application files
+# Copia de archivos de la aplicación
 COPY . /var/www/html
 
-# Generate the application key
+# Generar la clave de la aplicación
 RUN php artisan key:generate --force
 
-# Set permissions for Laravel storage and cache
+# Permisos para el almacenamiento y caché
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 9000 and start PHP-FPM server
+# Exponer el puerto 9000 para php-fpm
 EXPOSE 9000
 CMD ["php-fpm"]

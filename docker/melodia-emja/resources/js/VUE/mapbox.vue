@@ -176,17 +176,14 @@ export default {
                 const lng = e.lngLat.lng;
                 const lat = e.lngLat.lat;
 
-                // Eliminar marcador anterior si existe
                 if (this.marcadorPersonal) {
                     this.marcadorPersonal.remove();
                 }
 
-                // Crear nuevo marcador verde
                 this.marcadorPersonal = new mapboxgl.Marker({ color: "green" })
                     .setLngLat([lng, lat])
                     .addTo(this.map);
 
-                // Enviar al backend
                 this.store(lat, lng);
             });
         },
