@@ -87,12 +87,13 @@ export default {
         async obtenerMusicos() {
             try {
                 const response = await axios.get(
-                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
-                );
-                this.localMusicos = response.data.musicos;
+                    "http://localhost/melodianuevo/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
+                ); // Ajusta la URL según tu API
+                console.log("Datos recibidos de músicos:", response.data);
+                this.localMusicos = response.data.musicos; // Asignar datos a la variable local
                 this.agregarMarcadoresMusicos();
             } catch (error) {
-                console.error("Error al obtener datos de músicos:", error);
+                console.error("Error al obtener datos de músicos:", error.response.data);
             }
         },
 
@@ -109,7 +110,7 @@ export default {
                     .setLngLat([musico.long, musico.lat])
                     .setPopup(
                         new mapboxgl.Popup().setHTML(
-                            `<h3>${musico.descripcion}</h3>`
+                            `<h5>${musico.descripcion}</h5>`
                         )
                     )
                     .addTo(this.map);
@@ -119,10 +120,12 @@ export default {
         async obtenerDirecciones() {
             try {
                 const response = await axios.get(
-                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
-                );
-                this.restaurantes = response.data.restaurantes;
+                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
+                ); // Ajusta la URL según tu servidor
+                console.log("Datos recibidos de restaurantes:", response.data);
+                this.restaurantes = response.data.restaurantes; // Asignar datos a la variable local
 
+                // Iterar sobre cada restaurante y geocodificar su dirección
                 this.restaurantes.forEach((restaurante) => {
                     this.geocodificarDireccion(restaurante);
                 });
@@ -156,10 +159,10 @@ export default {
                         .setLngLat(coordinates)
                         .setPopup(
                             new mapboxgl.Popup().setHTML(`
-                                <h3>${nombreUsuario}</h3>
-                                <p>Dirección: ${restaurante.direccion}</p>
-                                <p>Descripción: ${descripcionUsuario}</p>
-                            `)
+                  <h3>${nombreUsuario}</h3>
+                  <p>Dirección: ${restaurante.direccion}</p>
+                  <p>Descripción: ${descripcionUsuario}</p>
+                `)
                         )
                         .addTo(this.map);
                 })
@@ -191,7 +194,7 @@ export default {
         store(lat, long) {
             axios
                 .post(
-                    "http://localhost:80/melodiaconectada/docker/melodia-emja/public/api/store",
+                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/store",
                     {
                         idUsuario: this.usuarioId,
                         lat: lat,
