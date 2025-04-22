@@ -15,14 +15,22 @@ class MapController extends Controller
     {
         $musicos = Musico::all();
 
-        return response()->json(['musicos' => $musicos,]);
+        return response()->json(['musicos' => $musicos]);
     }
 
     public function obtenerDirecciones()
 {
     $restaurantes = Restaurante::all();
 
-    return response()->json(['restaurantes' => $restaurantes]);
+    // Procesar cada restaurante para agregar coordenadas (opcional)
+    $restaurantesConDatos = $restaurantes->map(function ($restaurante) {
+        return [
+            'id' => $restaurante->usuarios_idUsuario,
+            'direccion' => $restaurante->direccion
+        ];
+    });
+
+    return response()->json(['restaurantes' => $restaurantesConDatos]);
 }
     /**
      * Display a listing of the resource.

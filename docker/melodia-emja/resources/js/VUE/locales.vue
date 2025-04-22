@@ -90,7 +90,7 @@ export default {
                         .setLngLat(coordinates)
                         .setPopup(
                             new mapboxgl.Popup().setHTML(`
-                  <h3>${nombreUsuario}</h3>
+                  <h4>${nombreUsuario}</h4>
                   <p>Dirección: ${restaurante.direccion}</p>
                   <p>Descripción: ${descripcionUsuario}</p>
                 `)

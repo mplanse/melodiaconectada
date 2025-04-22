@@ -19,17 +19,16 @@ use App\Http\Controllers\MusicoController;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+
 
 Route::get('/mapa', function () {
     return view('mapa.mapa');
-});
+})->name('mapa');
 Route::get('/locales', function () {
     return view('mapa.locales');
 });
-Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos', [EventoController::class, 'index'])->name('home');
 Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
 Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
 Route::get('/eventos/{id}/edit', [EventoController::class, 'edit'])->name('eventos.edit');

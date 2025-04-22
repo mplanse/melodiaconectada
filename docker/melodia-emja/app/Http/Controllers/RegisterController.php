@@ -31,23 +31,24 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|max:255|unique:usuarios',
-            'password' => 'required|string|min:8|confirmed',
-            'mail' => 'required|string|email|max:255|unique:usuarios',
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string',
-            'rol' => 'required|exists:roles,idRol',
-        ]);
 
-        $usuario = Usuario::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'mail' => $request->mail,
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'roles_idRol' => $request->rol,
-        ]);
+            $request->validate([
+        'username' => 'required|string|max:255|unique:usuarios',
+        'password' => 'required|string|min:8|confirmed',
+        'mail' => 'required|string|email|max:255|unique:usuarios',
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'nullable|string',
+        'rol' => 'required|exists:roles,idRol',
+    ]);
+
+    $usuario = Usuario::create([
+        'username' => $request->username,
+        'password' => Hash::make($request->password),
+        'mail' => $request->mail,
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'roles_idRol' => $request->rol,
+    ]);
 
         Auth::login($usuario);
 
