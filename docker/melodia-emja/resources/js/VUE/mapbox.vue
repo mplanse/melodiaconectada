@@ -120,7 +120,7 @@ export default {
         async obtenerDirecciones() {
             try {
                 const response = await axios.get(
-                    "/obtener-direcciones"
+                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
                 ); // Ajusta la URL según tu servidor
                 console.log("Datos recibidos de restaurantes:", response.data);
                 this.restaurantes = response.data.restaurantes; // Asignar datos a la variable local
@@ -159,7 +159,7 @@ export default {
                         .setLngLat(coordinates)
                         .setPopup(
                             new mapboxgl.Popup().setHTML(`
-                  <h5>${nombreUsuario}</h5 >
+                  <h3>${nombreUsuario}</h3>
                   <p>Dirección: ${restaurante.direccion}</p>
                   <p>Descripción: ${descripcionUsuario}</p>
                 `)
@@ -194,7 +194,7 @@ export default {
         store(lat, long) {
             axios
                 .post(
-                    "/store",
+                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/store",
                     {
                         idUsuario: this.usuarioId,
                         lat: lat,
