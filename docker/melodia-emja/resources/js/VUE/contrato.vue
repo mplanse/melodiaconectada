@@ -58,7 +58,7 @@
     methods: {
       async obtenerContratos() {
         try {
-          const response = await axios.get('http://localhost/melodiaconectada/docker/melodia-emja/public/api/contrato');
+          const response = await axios.get('/contrato');
           const contratos = response.data.data;
 
           this.restaurantes = contratos.map(c => c.restaurante).filter((v, i, a) => a.findIndex(t => (t.idRestaurante === v.idRestaurante)) === i);
@@ -79,7 +79,7 @@
           console.log('Enviando datos del contrato:', contratoData); // Debug
 
           const response = await axios.post(
-            'http://localhost/melodiaconectada/docker/melodia-emja/public/api/contrato',
+            '/contrato',
             contratoData,
             { headers: { 'Content-Type': 'application/json' } }
           );
