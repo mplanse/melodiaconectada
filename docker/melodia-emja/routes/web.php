@@ -19,7 +19,11 @@ use App\Http\Controllers\MusicoController;
 |
 */
 
-Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+});
 
 
 Route::get('/mapa', function () {
