@@ -1,23 +1,21 @@
 <template>
     <div class="eventos-container">
         <div class="cards-grid">
-            <div v-for="evento in eventos" :key="evento.idEventos"
-                class="evento-card"
-                @click="navigateToEventoDetails(evento.idEventos)"
-                role="button"
-                tabindex="0">
+            <div v-for="evento in eventos" :key="evento.idEventos" class="evento-item" @click="navigateToEventoDetails(evento.idEventos)" role="button" tabindex="0">
                 <div class="image-container">
-                    <img v-if="evento.urlMultimedia" :src="`img/eventos/${evento.urlMultimedia}`" :alt="evento.nombreEvento" class="evento-image">
+                    <!-- Concatenar la URL con 'storage' -->
+                    <img v-if="evento.urlMultimedia" :src="`img/${evento.urlMultimedia}`" :alt="evento.nombreEvento" class="evento-image">
                     <div v-else class="placeholder-image">Sin imagen</div>
                 </div>
-                <div class="card-content">
+                <div class="evento-content">
                     <h2 class="evento-title">{{ evento.nombreEvento }}</h2>
                     <p class="evento-description">{{ evento.descripcion }}</p>
                     <div class="evento-details">
                         <p class="evento-date"><i class="fas fa-calendar-alt"></i> {{ formatDate(evento.fecha) }}</p>
                         <p class="evento-price"><i class="fas fa-ticket-alt"></i> {{ formatPrice(evento.precio) }}</p>
                     </div>
-                    <div class="view-details">Ver detalles</div>
+                    <!-- Botón "Ver detalles" -->
+                    <a :href="`eventos/${evento.idEventos}`">Detalles</a>
                 </div>
             </div>
         </div>
@@ -54,11 +52,6 @@ export default {
             if (!price) return 'Precio no disponible';
             return `${price}€`;
         },
-        navigateToEventoDetails(eventoId) {
-            // Replace with your actual navigation logic
-            // For example with vue-router:
-            // this.$router.push(`/eventos/${eventoId}`);
-        }
     }
 }
 </script>
@@ -76,21 +69,12 @@ export default {
     gap: 1.5rem;
 }
 
-.evento-card {
+.evento-item {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: white;
+    background-color: transparent; /* Sin fondo */
     height: 100%;
     cursor: pointer;
-}
-
-.evento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .image-container {
@@ -103,11 +87,6 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.evento-card:hover .evento-image {
-    transform: scale(1.05);
 }
 
 .placeholder-image {
@@ -121,38 +100,37 @@ export default {
     font-style: italic;
 }
 
-.card-content {
-    padding: 1.25rem;
-    flex-grow: 1;
+.evento-content {
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
 }
 
 .evento-title {
     font-size: 1.3rem;
-    margin: 0 0 0.75rem;
-    color: #333;
+    margin: 0 0 0.5rem;
+    color: #fff; /* Texto blanco */
 }
 
 .evento-description {
     font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.75rem;
+    color: #ccc; /* Texto gris claro */
+    margin-bottom: 0.5rem;
     line-height: 1.5;
-    flex-grow: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
 }
 
 .evento-details {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     font-size: 0.85rem;
-    color: #555;
+    color: #aaa; /* Texto gris */
 }
 
 .evento-date, .evento-price {
@@ -162,28 +140,12 @@ export default {
 }
 
 .view-details {
-    color: #3498db;
+    color: #E09D89; /* Texto rosado */
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    transition: color 0.2s ease;
     font-size: 0.9rem;
-}
-
-.view-details::after {
-    content: "→";
-    font-size: 1.1em;
-    transition: transform 0.2s ease;
-}
-
-.evento-card:hover .view-details {
-    color: #2980b9;
-}
-
-.evento-card:hover .view-details::after {
-    transform: translateX(4px);
+    margin-top: 0.5rem;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /* Responsive adjustments */
