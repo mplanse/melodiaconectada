@@ -8,7 +8,7 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = "http://localhost/melodiaconectada/docker/melodia-emja/public";
+window.axios.defaults.baseURL = "http://localhost/melodianuevo/melodiaconectada/docker/melodia-emja/public";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
