@@ -1,4 +1,7 @@
 {
+  "_axios-439bb627.js": {
+    "file": "assets/axios-439bb627.js"
+  },
   "resources/css/app.css": {
     "file": "assets/app-07ceedef.css",
     "isEntry": true,
@@ -10,15 +13,26 @@
     "src": "resources/css/app.scss"
   },
   "resources/js/app.css": {
-    "file": "assets/app-1573d18e.css",
+    "file": "assets/app-e7a8a276.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-1573d18e.css"
+      "assets/app-e7a8a276.css"
     ],
-    "file": "assets/app-a30abb71.js",
+    "file": "assets/app-d90211fe.js",
+    "imports": [
+      "_axios-439bb627.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-d7af6f24.js",
+    "imports": [
+      "_axios-439bb627.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/bootstrap.js"
   }
 }
