@@ -4,7 +4,7 @@
             <div v-for="evento in eventos" :key="evento.idEventos" class="evento-item" @click="navigateToEventoDetails(evento.idEventos)" role="button" tabindex="0">
                 <div class="image-container">
                     <!-- Concatenar la URL con 'storage' -->
-                    <img v-if="evento.urlMultimedia" :src="`img/${evento.urlMultimedia}`" :alt="evento.nombreEvento" class="evento-image">
+                    <img v-if="evento.urlMultimedia" :src="`img/eventos/${evento.urlMultimedia}`" :alt="evento.nombreEvento" class="evento-image">
                     <div v-else class="placeholder-image">Sin imagen</div>
                 </div>
                 <div class="evento-content">

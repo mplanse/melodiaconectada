@@ -8,7 +8,7 @@
         <div class="col-md-6">
             <!-- Imagen del evento -->
             @if ($evento->urlMultimedia)
-                <img src="{{ asset('img/' . $evento->urlMultimedia) }}" alt="{{ $evento->nombreEvento }}" class="img-fluid rounded">
+                <img src="{{ asset('img/eventos' . $evento->urlMultimedia) }}" alt="{{ $evento->nombreEvento }}" class="img-fluid rounded">
             @else
                 <div class="bg-secondary text-light d-flex align-items-center justify-content-center" style="height: 300px;">
                     <span>Sin imagen</span>
