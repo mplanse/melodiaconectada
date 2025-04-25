@@ -19,7 +19,11 @@ use App\Http\Controllers\MusicoController;
 |
 */
 
-Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+});
 
 
 Route::get('/mapa', function () {
@@ -34,11 +38,10 @@ Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store
 Route::get('/eventos/{id}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.update');
 Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
-// Esta es para JSON
-Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.json');
+// Esta es para JSONs 
 
 // Esta es para la vista con Vue
-Route::get('/eventos/ver/{id}', [EventoController::class, 'evento_individual'])->name('eventos.show');
+Route::get('/eventos/{id}', [EventoController::class, 'evento_individual'])->name('eventos.show');
 
 
 

@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:80/melodianuevo/melodiaconectada/docker/melodia-emja/public/",
+            "url": "http://localhost:80/melodiaconectada/docker/melodia-emja/public/",
             "webRoot": "${workspaceFolder}"
         }
     ]
