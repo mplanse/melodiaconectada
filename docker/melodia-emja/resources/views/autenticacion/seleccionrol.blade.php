@@ -15,7 +15,6 @@
         <div class="role-side restaurant-side"></div>
 
         <div class="role-selection-content">
-            <h1 class="role-title">Selecciona tu Rol</h1>
 
             @if ($errors->any())
             <div class="alert alert-danger">

@@ -50,7 +50,7 @@ class RegisterController extends Controller
 
     Auth::login($usuario);
 
-    return redirect('/eventos.index')->with('success', 'Registro exitoso.');
+    return redirect('/eventos')->with('success', 'Registro exitoso.');
 
     }
 }
