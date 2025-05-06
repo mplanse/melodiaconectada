@@ -38,9 +38,6 @@ Route::get('/getEventos', [EventoController::class, 'getEventos'])->name('evento
 
 Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
 
-
-Route::get('musicos-restaurantes', [ContratoController::class, 'obtenerMusicosYRestaurantes']);
-
 Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones']);
 
 Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);

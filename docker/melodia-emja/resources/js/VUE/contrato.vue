@@ -133,7 +133,7 @@ axios.get('/api/restaurante')
           console.log('Enviando datos del contrato:', contratoData); // Debug
 
           const response = await axios.post(
-            'http://localhost/melodiaconectada/docker/melodia-emja/public/api/contrato',
+            '/contrato',
             contratoData,
             { headers: { 'Content-Type': 'application/json' } }
           );

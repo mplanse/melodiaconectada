@@ -43,7 +43,7 @@ export default {
         async obtenerDirecciones() {
             try {
                 const response = await axios.get(
-                    "http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
+                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
                 ); // Ajusta la URL según tu servidor
                 const restaurantes = response.data.restaurantes;
 

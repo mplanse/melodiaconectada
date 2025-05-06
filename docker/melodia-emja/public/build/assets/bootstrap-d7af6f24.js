@@ -1,0 +1,1 @@
+import{a as o}from"./axios-439bb627.js";window.axios=o;window.axios.defaults.headers.common["X-Requested-With"]="XMLHttpRequest";window.axios.defaults.baseURL="http://localhost/melodiaconectada/docker/melodia-emja/public";

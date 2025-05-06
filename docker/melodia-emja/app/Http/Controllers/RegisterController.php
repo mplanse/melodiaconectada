@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rol;
+use App\Models\Musico;
 use App\Models\Usuario;
+use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +50,7 @@ class RegisterController extends Controller
         'roles_idRol' => $request->rol,
     ]);
 
-    Auth::login($usuario);
+        Auth::login($usuario);
 
     return redirect('/eventos')->with('success', 'Registro exitoso.');
 

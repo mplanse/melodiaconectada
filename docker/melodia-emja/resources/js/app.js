@@ -7,7 +7,7 @@ import Contrato from './VUE/Contrato.vue';
 import Eventos from './VUE/eventos.vue';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:8080/melodiaconectada/docker/melodia-emja/public/api';
+axios.defaults.baseURL = 'http://localhost/melodiaconectada/docker/melodia-emja/public/api';
 
 const app = createApp({});
 
