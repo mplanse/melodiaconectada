@@ -15,6 +15,7 @@ class EventoController extends Controller
     public function index()
     {
         return view('eventos.index');
+
     }
     public function getEventos()
     {
@@ -119,7 +120,11 @@ class EventoController extends Controller
 
     public function evento_individual($id)
     {
-        return view('eventos.evento_individual', compact('id'));
+        // Buscar el evento por ID
+        $evento = Evento::findOrFail($id);
+
+        // Retornar la vista con los datos del evento
+        return view('eventos.evento_individual', compact('evento'));
     }
 
     /**

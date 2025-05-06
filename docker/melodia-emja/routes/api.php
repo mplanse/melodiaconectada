@@ -1,16 +1,15 @@
 <?php
 
 
+use App\Http\Controllers\api\restauranteApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\EventoController;
-
-
-
 use App\Http\Controllers\api\ContratoController;
-
+use App\Http\Controllers\api\musicoApi;
+use App\Http\Controllers\api\usuariosApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('mapa', MapController::class);
 
+Route::get('/usuarios', [usuariosApi::class, 'index']);
 
 Route::apiResource('contrato', ContratoController::class);
 
@@ -43,5 +43,8 @@ Route::get('/obtener-direcciones', [MapController::class, 'obtenerDirecciones'])
 Route::get('/recibir-imagen', [MultimediaController::class, 'getUserImages']);
 Route::post('/guardar-imagen', [MultimediaController::class, 'store']);
 
-//  Route::post('/pepe', [MapController::class, 'pepe']);
-Route::post('/store', [MapController::class, 'store']);
+Route::apiResource('musicos', musicoApi::class);
+
+Route::apiResource('restaurante', restauranteApi::class);
+
+

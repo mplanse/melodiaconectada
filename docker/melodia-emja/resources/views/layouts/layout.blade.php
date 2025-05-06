@@ -12,6 +12,15 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> --}}
     <style>
+        body {
+            background-color: #212529;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el alto de la ventana */
+        }
+        .content {
+            flex-grow: 1; /* Empuja el footer hacia abajo */
+        }
         .navbar {
             background-color: #1C1C1C; /* Fondo oscuro */
             display: flex;
@@ -60,14 +69,14 @@
             font-size: 1.5rem;
             text-decoration: none;
             margin-left: 1.5rem;
-            margin-right: 1.5rem
+            margin-right: 1.5rem;
         }
         .nav-icon:hover {
             color: #FFFFFF; /* Cambia a blanco al pasar el mouse */
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column">
 
     <nav class="navbar">
         <!-- Logo y texto a la izquierda -->
@@ -94,12 +103,14 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <!-- Contenido principal -->
+    <div class="content container mt-4">
         @yield('content') <!-- Aquí se inyectará el contenido de las vistas hijas -->
     </div>
 
+    <!-- Footer pegado abajo -->
     <footer class="bg-dark text-light text-center py-3 mt-5">
-        <p>&copy; {{ date('Y') }} Mi Aplicación. Todos los derechos reservados.</p>
+        <p>Beatbite. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->
