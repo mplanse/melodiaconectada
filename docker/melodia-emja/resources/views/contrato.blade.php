@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrato</title>
-    @vite('resources/js/app.js') <!-- Asegúrate de que Vite está cargando Vue -->
-</head>
-<body>
-    <div id="app">
-        <contrato-component></contrato-component>  <!-- Renderiza el componente Vue -->
-    </div>
-</body>
-</html>
+@extends('layouts.layout')
+
+@section('content')
+{{-- @dd($musicos) <!-- Esto mostrará el contenido de $musicos --> --}}
+<div id="app">
+    <div id="app" usuario="{{ auth()->user()->id }}"></div>
+
+    <contrato-component></contrato-component>  <!-- Renderiza el componente Vue -->
+</div>
+<div>id=</div>
+@endsection
+
+
+
+
