@@ -99,6 +99,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                 <input type="password" name="password_confirmation" class="form-control" placeholder="Confirmar contraseña" required>
                 <input type="text" name="nombre" class="form-control" placeholder="Nombre del establecimiento" value="{{ old('nombre') }}" required>
+                <input type="text" name="direccion" class="form-control" placeholder="Dirección del establecimiento" value="{{ old('direccion') }}" required>
                 <textarea name="descripcion" class="form-control" placeholder="Descripción del restaurante (opcional)" rows="2">{{ old('descripcion') }}</textarea>
 
                 <button type="submit" class="btn-register">Registrarse</button>
