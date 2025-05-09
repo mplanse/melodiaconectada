@@ -31,28 +31,42 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string|max:255|unique:usuarios',
+            'password' => 'required|string|min:8|confirmed',
+            'mail' => 'required|string|email|max:255|unique:usuarios',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'rol' => 'required|exists:roles,idRol',
+        ]);
 
-            $request->validate([
-        'username' => 'required|string|max:255|unique:usuarios',
-        'password' => 'required|string|min:8|confirmed',
-        'mail' => 'required|string|email|max:255|unique:usuarios',
-        'nombre' => 'required|string|max:255',
-        'descripcion' => 'nullable|string',
-        'rol' => 'required|exists:roles,idRol',
-    ]);
+        // Create user
+        $usuario = Usuario::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'mail' => $request->mail,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'roles_idRol' => $request->rol,
+        ]);
 
-    $usuario = Usuario::create([
-        'username' => $request->username,
-        'password' => Hash::make($request->password),
-        'mail' => $request->mail,
-        'nombre' => $request->nombre,
-        'descripcion' => $request->descripcion,
-        'roles_idRol' => $request->rol,
-    ]);
+        // Create related record based on role (1 = Músico, 2 = Restaurante)
+        if ($request->rol == 1) {
+            // Create a record in the musicos table
+            $musico = new Musico();
+            $musico->idMusico = $usuario->idUsuario; // Use the user ID as the musico ID
+            $musico->descripcion = $request->descripcion;
+            $musico->save();
+        } elseif ($request->rol == 2) {
+            // Create a record in the restaurantes table
+            $restaurante = new Restaurante();
+            $restaurante->idRestaurante = $usuario->idUsuario; // Use the user ID as the restaurante ID
+            $restaurante->direccion = $request->direccion ?? ''; // Add a field for direccion in your form
+            $restaurante->save();
+        }
 
         Auth::login($usuario);
 
-    return redirect('/eventos')->with('success', 'Registro exitoso.');
-
+        return redirect('/eventos')->with('success', 'Registro exitoso.');
     }
 }

@@ -90,6 +90,7 @@
             <a class="nav-link" href="{{ route('home') }}">Inicio</a>
             <a class="nav-link" href="{{ route('mensajes.index') }}">Chat</a>
             <a class="nav-link" href="{{ route('perfil.edit') }}">Perfil</a>
+            <a class="nav-link" href="{{ route('contrato') }}">Contratos</a>
         </div>
 
         <!-- Íconos a la derecha -->
