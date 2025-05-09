@@ -87,7 +87,7 @@ export default {
         async obtenerMusicos() {
             try {
                 const response = await axios.get(
-                    "http://localhost/melodianuevo/melodiaconectada/docker/melodia-emja/public/api/obtener-coordenadas"
+                    "/obtener-coordenadas"
                 ); // Ajusta la URL según tu API
                 console.log("Datos recibidos de músicos:", response.data);
                 this.localMusicos = response.data.musicos; // Asignar datos a la variable local
@@ -120,7 +120,7 @@ export default {
         async obtenerDirecciones() {
             try {
                 const response = await axios.get(
-                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/obtener-direcciones"
+                    "/obtener-direcciones"
                 ); // Ajusta la URL según tu servidor
                 console.log("Datos recibidos de restaurantes:", response.data);
                 this.restaurantes = response.data.restaurantes; // Asignar datos a la variable local
@@ -194,7 +194,7 @@ export default {
         store(lat, long) {
             axios
                 .post(
-                    "http://localhost/melodiaconectada/docker/melodia-emja/public/api/store",
+                    "/store",
                     {
                         idUsuario: this.usuarioId,
                         lat: lat,
