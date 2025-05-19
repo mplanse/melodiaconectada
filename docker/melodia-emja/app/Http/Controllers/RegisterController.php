@@ -50,18 +50,15 @@ class RegisterController extends Controller
             'roles_idRol' => $request->rol,
         ]);
 
-        // Create related record based on role (1 = Músico, 2 = Restaurante)
         if ($request->rol == 1) {
-            // Create a record in the musicos table
             $musico = new Musico();
-            $musico->idMusico = $usuario->idUsuario; // Use the user ID as the musico ID
+            $musico->idMusico = $usuario->idUsuario;
             $musico->descripcion = $request->descripcion;
             $musico->save();
         } elseif ($request->rol == 2) {
-            // Create a record in the restaurantes table
             $restaurante = new Restaurante();
-            $restaurante->idRestaurante = $usuario->idUsuario; // Use the user ID as the restaurante ID
-            $restaurante->direccion = $request->direccion ?? ''; // Add a field for direccion in your form
+            $restaurante->idRestaurante = $usuario->idUsuario;
+            $restaurante->direccion = $request->direccion ?? '';
             $restaurante->save();
         }
 
